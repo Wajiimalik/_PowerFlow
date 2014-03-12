@@ -30,6 +30,5 @@ int main()
 		cout << "Connection Position: " << Board.Cells[i].GetConnectionPosition() << endl<<endl;
 	}
 
-	int x;	cin >> x;
 	return 0;
 }
