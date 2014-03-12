@@ -1,0 +1,7 @@
+_PowerFlow/Debug
+Debug
+ipch
+*.user
+*.opensdf
+*.sdf
+*.suo
