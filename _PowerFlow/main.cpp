@@ -1,34 +1,37 @@
 #include <iostream>
-#include <string>
+//#include <string>
 
+//#include <SFML/Graphics.hpp>
 #include "datastructures.h"
 #include "board.h"
+
+using namespace sf;
 using namespace std;
 
 int main()
 {
-	DataBase DataBase;
-
 	int levelNo = 1;
-	DataBase.LoadDataBase(levelNo);
+	Board gameBoard(levelNo);
+	
+	RenderWindow window(VideoMode(900, 700), "POWER FLOW");
+	//StartGame(window);
 
-	Board Board;
-	for (int i = 0; i < ROW*COL; i++)
+	while (window.isOpen())
 	{
-		cout << "Index # " << i << endl;
-		Board.Cells[i].SetIndexOfThisCell(i);
-		Board.Cells[i].SetObjectType( DataBase.GetObjectType(i) );
-		Board.Cells[i].SetConnectionType( DataBase.GetConnectionType(i) );
-		Board.Cells[i].SetConnectionPostion(DataBase.GetUnSolvedPuzzle(i));
-	}
+		Event event;
 
-	for (int i = 0; i < ROW*COL; i++)
-	{
-		cout << "Index # " << Board.Cells[i].GetIndexOfThisCell() << endl;
-		cout << "Object Type: " << Board.Cells[i].GetObjectType() << endl;
-		cout << "Connection Type: " << Board.Cells[i].GetConnectiontype() << endl;
-		cout << "Connection Position: " << Board.Cells[i].GetConnectionPosition() << endl<<endl;
-	}
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::Closed)
+			{
+				window.close();
+			}
+		}
+		window.clear(Color::Black);
 
+		gameBoard.DrawBoard(window);
+	}
+	
+	window.display();
 	return 0;
 }

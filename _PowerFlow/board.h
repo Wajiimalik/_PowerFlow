@@ -1,34 +1,57 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <string>
-#include <iostream>
 
-#include "datastructures.h"
+#include "database.h"
 #include "Cell.h"
-using namespace std;
 
 class Board
 {
 private:
-	int _cellNo;	//index of cell
+	DataBase DataBase;
 	PuzzleState _puzzleState;
 
 public:
 	Cell Cells[ROW * COL];	//objects of cell (25 in number)
 
 public:
-	Board()
+	Board(int levelNo)
 	{
-		_cellNo = 0;
 		_puzzleState = UnSolved;
+		DataBase.LoadDataBase(levelNo);
+
+		for (int i = 0; i < ROW*COL; i++)
+		{
+			cout << "Index # " << i << endl;
+			Cells[i].SetIndexOfThisCell(i);
+			Cells[i].SetObjectType( DataBase.GetObjectType(i) );
+			Cells[i].SetConnectionType( DataBase.GetConnectionType(i) );
+			Cells[i].SetConnectionPostion( DataBase.GetUnSolvedPuzzle(i) );
+		}
 	}
 
-	void DrawBoard()
-	{
-		//draw grid line
+	void DrawBoard(RenderWindow & window)
+	{ 
+		RectangleShape rectangle( Vector2f(CELL_LENGTH, CELL_LENGTH) );
+		rectangle.setFillColor( Color::Black );
+		rectangle.setOutlineThickness( 1 );
+		rectangle.setOutlineColor( Color::White );
+
+		//drawing grid and assigning values to cell params
+		for (int i = 50, index = 0; i <= 530; i += 120)
+		{
+			for (int j = 50; j <= 530; j += 120, index++)
+			{
+				rectangle.setPosition(i, j);
+				window.draw(rectangle);
+				Cells[index].SetCell(i, j);
+				Cells[index].CalculateCoords(window);
+			}
+		}
+
+		window.display();
+
 		//draw cell call
-		_cellNo++;
 	}
 
 	bool CheckCellsState()

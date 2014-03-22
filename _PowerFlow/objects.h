@@ -50,11 +50,14 @@ protected:
 	Co_Ordinates _coordA;
 	Co_Ordinates _coordB;
 	Co_Ordinates _coordC;
+	Co_Ordinates _coordD;
+
 public:
 	virtual void MoveObject() = 0;
 	Co_Ordinates GetCoordAOfConnection() { return _coordA; }
 	Co_Ordinates GetCoordBOfConnection() { return _coordB; }
 	Co_Ordinates GetCoordCOfConnection() { return _coordC; }
+	Co_Ordinates GetCoordDOfConnection() { return _coordD; }
 };
 
 //devived types of connection
