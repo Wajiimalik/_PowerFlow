@@ -19,15 +19,18 @@ public:
 	{
 		_puzzleState = UnSolved;
 		DataBase.LoadDataBase(levelNo);
+		this->DrawBoard();
 
 		for (int i = 0; i < ROW*COL; i++)
 		{
 			cout << "Index # " << i << endl;
 			Cells[i].SetIndexOfThisCell(i);
 			Cells[i].SetObjectType(DataBase.GetObjectType(i));
-			Cells[i].SetConnectionType(DataBase.GetConnectionType(i));
 			Cells[i].SetConnectionPostion(DataBase.GetUnSolvedPuzzle(i));
+			Cells[i].SetConnectionType(DataBase.GetConnectionType(i));
+
 		}
+		window.display();
 	}
 
 	void DrawBoard()
@@ -42,14 +45,14 @@ public:
 		{
 			for (int j = 50; j <= 530; j += 120, index++)
 			{
-				rectangle.setPosition(i, j);
+				rectangle.setPosition(j, i);
 				window.draw(rectangle);
-				Cells[index].SetCell(i, j);
-				Cells[index].CalculateCoords();
+				Cells[index].SetCell(j, i);
+				//Cells[index].CalculateCoords();
 			}
 		}
 
-		window.display();
+		//window.display();
 	}
 
 	bool CheckCellsState()

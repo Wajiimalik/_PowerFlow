@@ -84,25 +84,32 @@ public:
 		case 'L':
 			_connectionType = L_Shaped;
 			_ptrConnection = new L_ShapedConnection;
-			_ptrConnection->SetConnectionPosition(_connectionPosition);
+
+			this->CalculateCoords();
+
+			cout << endl << "Print left: " << _left << " top: " << _top << endl;
+			_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			_ptrConnection->DrawObject();
 			break;
 		case 'T':
 			_connectionType = T_Shaped;
 			_ptrConnection = new T_ShapedConnection;
-			_ptrConnection->SetConnectionPosition(_connectionPosition);
+			this->CalculateCoords();
+			_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			_ptrConnection->DrawObject();
 			break;
 		case 'S':
 			_connectionType = Straight;
 			_ptrConnection = new StraightConnection;
-			_ptrConnection->SetConnectionPosition(_connectionPosition);
+			this->CalculateCoords();
+			_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			_ptrConnection->DrawObject();
 			break;
 		case 'M':
 			_connectionType = Mini;
 			_ptrConnection = new MiniConnection;
-			_ptrConnection->SetConnectionPosition(_connectionPosition);
+			this->CalculateCoords();
+			_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			_ptrConnection->DrawObject();
 			break;
 		default:

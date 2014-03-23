@@ -21,9 +21,9 @@ int main()
 		}
 		window.clear(Color::Black);
 
-		gameBoard.DrawBoard();
+		//gameBoard.DrawBoard();
 	}
 
-	window.display();
+	//window.display();
 	return 0;
 }
