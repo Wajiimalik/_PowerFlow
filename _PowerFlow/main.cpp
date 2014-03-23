@@ -1,20 +1,12 @@
-#include <iostream>
-//#include <string>
 
-//#include <SFML/Graphics.hpp>
 #include "datastructures.h"
 #include "board.h"
 
-using namespace sf;
-using namespace std;
 
 int main()
 {
 	int levelNo = 1;
 	Board gameBoard(levelNo);
-	
-	RenderWindow window(VideoMode(900, 700), "POWER FLOW");
-	//StartGame(window);
 
 	while (window.isOpen())
 	{
@@ -29,9 +21,9 @@ int main()
 		}
 		window.clear(Color::Black);
 
-		gameBoard.DrawBoard(window);
+		gameBoard.DrawBoard();
 	}
-	
+
 	window.display();
 	return 0;
 }

@@ -24,18 +24,18 @@ public:
 		{
 			cout << "Index # " << i << endl;
 			Cells[i].SetIndexOfThisCell(i);
-			Cells[i].SetObjectType( DataBase.GetObjectType(i) );
-			Cells[i].SetConnectionType( DataBase.GetConnectionType(i) );
-			Cells[i].SetConnectionPostion( DataBase.GetUnSolvedPuzzle(i) );
+			Cells[i].SetObjectType(DataBase.GetObjectType(i));
+			Cells[i].SetConnectionType(DataBase.GetConnectionType(i));
+			Cells[i].SetConnectionPostion(DataBase.GetUnSolvedPuzzle(i));
 		}
 	}
 
-	void DrawBoard(RenderWindow & window)
-	{ 
-		RectangleShape rectangle( Vector2f(CELL_LENGTH, CELL_LENGTH) );
-		rectangle.setFillColor( Color::Black );
-		rectangle.setOutlineThickness( 1 );
-		rectangle.setOutlineColor( Color::White );
+	void DrawBoard()
+	{
+		RectangleShape rectangle(Vector2f(CELL_LENGTH, CELL_LENGTH));
+		rectangle.setFillColor(Color::Black);
+		rectangle.setOutlineThickness(1);
+		rectangle.setOutlineColor(Color::White);
 
 		//drawing grid and assigning values to cell params
 		for (int i = 50, index = 0; i <= 530; i += 120)
@@ -45,13 +45,11 @@ public:
 				rectangle.setPosition(i, j);
 				window.draw(rectangle);
 				Cells[index].SetCell(i, j);
-				Cells[index].CalculateCoords(window);
+				Cells[index].CalculateCoords();
 			}
 		}
 
 		window.display();
-
-		//draw cell call
 	}
 
 	bool CheckCellsState()

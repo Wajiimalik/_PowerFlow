@@ -13,14 +13,10 @@ private:
 	int _indexOfThisCell;
 	Co_Ordinates _midPoint;
 
-	Co_Ordinates _midOfA;
-	Co_Ordinates _midOfB;
-	Co_Ordinates _midOfC;
-	Co_Ordinates _midOfD;
-
 	ObjectState _cellState;
 	ObjectType _objectType;
 
+public:
 	ConnectionType _connectionType;
 	ConnectionPosition _connectionPosition;
 
@@ -30,10 +26,6 @@ private:
 public:
 	Cell() { _cellState = UnLit; }
 
-	void DrawCell() {}
-
-	void GetClickedCell(int mouseX, int mouseY) {}
-	
 
 	void SetCell(int inLeft, int inTop)
 	{
@@ -41,59 +33,28 @@ public:
 		_top = inTop;
 	}
 
-	void CalculateCoords(RenderWindow & window)
+	void CalculateCoords()
 	{
 		//MidOfA
-		_midOfA.SetX(_left + (CELL_LENGTH / 2));
-		_midOfA.SetY(_top);
-
-		RectangleShape testA(Vector2f(3, 3));
-		testA.setFillColor(Color::Green);
-		testA.setPosition(_midOfA.GetX(), _midOfA.GetY());
-		window.draw(testA);
+		_ptrConnection->Set_a_Coord(_left + (CELL_LENGTH / 2), _top);
 
 		//MidOfB
-		_midOfB.SetX(_left + CELL_LENGTH);
-		_midOfB.SetY(_top + (CELL_LENGTH / 2));
-
-		RectangleShape testB(Vector2f(3, 3));
-		testB.setFillColor(Color::Green);
-		testB.setPosition(_midOfB.GetX(), _midOfB.GetY());
-		window.draw(testB);
+		_ptrConnection->Set_b_Coord(_left + CELL_LENGTH, _top + (CELL_LENGTH / 2));
 
 		//MidofC
-		_midOfC.SetX(_left + (CELL_LENGTH / 2));
-		_midOfC.SetY(_top + CELL_LENGTH);
-
-		RectangleShape testC(Vector2f(3, 3));
-		testC.setFillColor(Color::Green);
-		testC.setPosition(_midOfC.GetX(), _midOfC.GetY());
-		window.draw(testC);
+		_ptrConnection->Set_c_Coord(_left + (CELL_LENGTH / 2), _top + CELL_LENGTH);
 
 		//MidofD
-		_midOfD.SetX(_left);
-		_midOfD.SetY(_top + (CELL_LENGTH / 2));
-
-		RectangleShape testD(Vector2f(3, 3));
-		testD.setFillColor(Color::Green);
-		testD.setPosition(_midOfD.GetX(), _midOfD.GetY());
-		window.draw(testD);
-
+		_ptrConnection->Set_d_Coord(_left, _top + (CELL_LENGTH / 2));
 
 		//MidPt
-		_midPoint.SetX((_midOfD.GetX() + _midOfB.GetX()) / 2);
-		_midPoint.SetY((_midOfA.GetY() + _midOfC.GetY()) / 2);
-
-		RectangleShape mids(Vector2f(3, 3));
-		mids.setFillColor(Color::Green);
-		mids.setPosition(_midPoint.GetX(), _midPoint.GetY());
-		window.draw(mids);
-
+		_ptrConnection->CalculateRefPoint();
+		_midPoint = _ptrConnection->GetRefPt();
 	}
 
 	void SetObjectType(char inType)
 	{
-		switch(inType)
+		switch (inType)
 		{
 		case 'F':
 			_objectType = Factory;
@@ -123,26 +84,26 @@ public:
 		case 'L':
 			_connectionType = L_Shaped;
 			_ptrConnection = new L_ShapedConnection;
+			_ptrConnection->SetConnectionPosition(_connectionPosition);
 			_ptrConnection->DrawObject();
-			this->SetCoordOfConnections();
 			break;
 		case 'T':
 			_connectionType = T_Shaped;
 			_ptrConnection = new T_ShapedConnection;
+			_ptrConnection->SetConnectionPosition(_connectionPosition);
 			_ptrConnection->DrawObject();
-			this->SetCoordOfConnections();
 			break;
 		case 'S':
 			_connectionType = Straight;
 			_ptrConnection = new StraightConnection;
+			_ptrConnection->SetConnectionPosition(_connectionPosition);
 			_ptrConnection->DrawObject();
-			this->SetCoordOfConnections();
 			break;
 		case 'M':
 			_connectionType = Mini;
 			_ptrConnection = new MiniConnection;
+			_ptrConnection->SetConnectionPosition(_connectionPosition);
 			_ptrConnection->DrawObject();
-			this->SetCoordOfConnections();
 			break;
 		default:
 			cout << "InValid Connection Type" << endl;
@@ -171,16 +132,6 @@ public:
 		}
 	}
 
-	//GET METHODS FOR COORD
-	void SetCoordOfConnections()
-	{
-		_midOfA = _ptrConnection->GetCoordAOfConnection();
-		_midOfB = _ptrConnection->GetCoordBOfConnection();
-		_midOfC = _ptrConnection->GetCoordCOfConnection();
-		_midOfD = _ptrConnection->GetCoordDOfConnection();
-	}
-
-
 	void SetLit()
 	{
 		_cellState = Lit;
@@ -192,33 +143,10 @@ public:
 		_cellState = UnLit;
 	}
 
-
-	Co_Ordinates GetMidOfA()
-	{
-		return _midOfA;
-	}
-
-	Co_Ordinates GetMidOfB()
-	{
-		return _midOfB;
-	}
-
-	Co_Ordinates GetMidOfC()
-	{
-		return _midOfC;
-	}
-
-	Co_Ordinates GetMidOfD()
-	{
-		return _midOfD;
-	}
-
-
 	//we have get clicked cell
 	void MoveObjectOfCell()
 	{
 		_ptrConnection->MoveObject();
-		this->SetCoordOfConnections();
 	}
 
 	void SetIndexOfThisCell(int index)
