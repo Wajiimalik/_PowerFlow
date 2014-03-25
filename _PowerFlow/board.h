@@ -1,69 +1,26 @@
-#ifndef BOARD_H
-#define BOARD_H
-
+#pragma once
+//#ifndef BOARD_H
+//#define BOARD_H
 
 #include "database.h"
 #include "Cell.h"
 
+
 class Board
 {
-private:
 	DataBase DataBase;
 	PuzzleState _puzzleState;
 
 public:
-	Cell Cells[ROW * COL];	//objects of cell (25 in number)
+	Cell Cells[ROW * COL];
 
 public:
-	Board(int levelNo)
-	{
-		_puzzleState = UnSolved;
-		DataBase.LoadDataBase(levelNo);
+	Board(int levelNo);
 
-		for (int i = 0; i < ROW*COL; i++)
-		{
-			cout << "Index # " << i << endl;
-			Cells[i].SetIndexOfThisCell(i);
-			Cells[i].SetObjectType( DataBase.GetObjectType(i) );
-			Cells[i].SetConnectionType( DataBase.GetConnectionType(i) );
-			Cells[i].SetConnectionPostion( DataBase.GetUnSolvedPuzzle(i) );
-		}
-	}
+	void DrawBoard();
 
-	void DrawBoard(RenderWindow & window)
-	{ 
-		RectangleShape rectangle( Vector2f(CELL_LENGTH, CELL_LENGTH) );
-		rectangle.setFillColor( Color::Black );
-		rectangle.setOutlineThickness( 1 );
-		rectangle.setOutlineColor( Color::White );
+	bool CheckCellsState();
 
-		//drawing grid and assigning values to cell params
-		for (int i = 50, index = 0; i <= 530; i += 120)
-		{
-			for (int j = 50; j <= 530; j += 120, index++)
-			{
-				rectangle.setPosition(i, j);
-				window.draw(rectangle);
-				Cells[index].SetCell(i, j);
-				Cells[index].CalculateCoords(window);
-			}
-		}
-
-		window.display();
-
-		//draw cell call
-	}
-
-	bool CheckCellsState()
-	{
-		//compares coord of connection to check lit or unlit
-		//then call cell setlit
-	}
-
-	bool CheckPuzzleState()
-	{
-		//if solved then game over
-	}
+	bool CheckPuzzleState();
 };
-
-#endif /* BOARD_H */
+//#endif /* BOARD_H */

@@ -11,14 +11,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="board.h" />
-    <ClInclude Include="cell.h" />
-    <ClInclude Include="database.h" />
-    <ClInclude Include="datastructures.h" />
-    <ClInclude Include="objects.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Cell.h" />
+    <ClInclude Include="DataBase.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Objects.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="DataBase.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Objects.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B7A102D5-27F5-473B-9B9C-46F94796600A}</ProjectGuid>
