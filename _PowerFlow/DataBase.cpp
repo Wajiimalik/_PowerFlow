@@ -20,6 +20,11 @@
 
 	///=====================================================================///
 
+	void DataBase::SetLevelNo(int level)
+	{
+		_levelNo = level;
+	}
+
 	void DataBase :: AssigningValuesToFactoryHouses()
 	{
 		ObjectsType[16] = 'F'; ObjectsType[0] = 'H'; ObjectsType[3] = 'H'; ObjectsType[4] = 'H';
@@ -56,15 +61,15 @@
 	//method for test program //in end this part would be removed
 	void  DataBase :: AssigningValuesToSolvedPuzzle()
 	{
-		solvedPuzzle[0] = 4; solvedPuzzle[1] = 2; solvedPuzzle[2] = 1; solvedPuzzle[3] = 2; solvedPuzzle[4] = 4;
+		solvedPuzzle[0] = 3; solvedPuzzle[1] = 2; solvedPuzzle[2] = 1; solvedPuzzle[3] = 4; solvedPuzzle[4] = 3;
 
-		solvedPuzzle[5] = 2; solvedPuzzle[6] = 4; solvedPuzzle[7] = 1; solvedPuzzle[8] = 2; solvedPuzzle[9] = 2;
+		solvedPuzzle[5] = 2; solvedPuzzle[6] = 4; solvedPuzzle[7] = 1; solvedPuzzle[8] = 4; solvedPuzzle[9] = 2;
 
 		solvedPuzzle[10] = 4; solvedPuzzle[11] = 3; solvedPuzzle[12] = 1; solvedPuzzle[13] = 1; solvedPuzzle[14] = 2;
 
-		solvedPuzzle[15] = 1; solvedPuzzle[16] = 2; solvedPuzzle[17] = 4; solvedPuzzle[18] = 3; solvedPuzzle[19] = 2;
+		solvedPuzzle[15] = 1; solvedPuzzle[16] = 4; solvedPuzzle[17] = 3; solvedPuzzle[18] = 1; solvedPuzzle[19] = 2;
 
-		solvedPuzzle[20] = 1; solvedPuzzle[21] = 1; solvedPuzzle[22] = 3; solvedPuzzle[23] = 2; solvedPuzzle[24] = 4;
+		solvedPuzzle[20] = 2; solvedPuzzle[21] = 1; solvedPuzzle[22] = 3; solvedPuzzle[23] = 2; solvedPuzzle[24] = 4;
 
 	}
 
@@ -72,20 +77,20 @@
 	//method for test program //in end this part would be removed
 	void  DataBase :: AssigningValuesToUnSolvedPuzzle()
 	{
-		unSolvedPuzzle[0] = 2; unSolvedPuzzle[1] = 1; unSolvedPuzzle[2] = 1; unSolvedPuzzle[3] = 1; unSolvedPuzzle[4] = 3;
+		unSolvedPuzzle[0] = 4; unSolvedPuzzle[1] = 1; unSolvedPuzzle[2] = 1; unSolvedPuzzle[3] = 2; unSolvedPuzzle[4] = 1;
 
-		unSolvedPuzzle[5] = 1; unSolvedPuzzle[6] = 1; unSolvedPuzzle[7] = 2; unSolvedPuzzle[8] = 1; unSolvedPuzzle[9] = 1;
+		unSolvedPuzzle[5] = 1; unSolvedPuzzle[6] = 1; unSolvedPuzzle[7] = 2; unSolvedPuzzle[8] = 2; unSolvedPuzzle[9] = 1;
 
 		unSolvedPuzzle[10] = 1; unSolvedPuzzle[11] = 4; unSolvedPuzzle[12] = 1; unSolvedPuzzle[13] = 3; unSolvedPuzzle[14] = 4;
 
-		unSolvedPuzzle[15] = 2; unSolvedPuzzle[16] = 4; unSolvedPuzzle[17] = 3; unSolvedPuzzle[18] = 2; unSolvedPuzzle[19] = 2;
+		unSolvedPuzzle[15] = 2; unSolvedPuzzle[16] = 3; unSolvedPuzzle[17] = 1; unSolvedPuzzle[18] = 4; unSolvedPuzzle[19] = 2;
 
-		unSolvedPuzzle[20] = 2; unSolvedPuzzle[21] = 1; unSolvedPuzzle[22] = 2; unSolvedPuzzle[23] = 1; unSolvedPuzzle[24] = 2;
+		unSolvedPuzzle[20] = 4; unSolvedPuzzle[21] = 1; unSolvedPuzzle[22] = 2; unSolvedPuzzle[23] = 1; unSolvedPuzzle[24] = 2;
 
 	}
 
 
-	void  DataBase:: LoadDataBase(int levelNo)
+	void  DataBase:: LoadDataBase()
 	{
 		this->AssigningValuesToConnectionType();
 		this->AssigningValuesToFactoryHouses();

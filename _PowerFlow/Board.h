@@ -11,13 +11,14 @@ class Board
 	DataBase DataBase;
 	PuzzleState _puzzleState;
 
+	RectangleShape _rectangle;
 public:
 	Cell Cells[ROW * COL];
 
 public:
 	Board(int levelNo);
 
-	void DrawBoard();
+	void DrawBoard(RenderWindow & window);
 
 	bool CheckCellsState();
 

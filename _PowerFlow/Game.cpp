@@ -1,15 +1,10 @@
 #include "Game.h"
 
-Game::Game(RenderWindow & window) : _window(window) {}
+Game::Game(RenderWindow & window) : _window(window), _levelNo(1) {}
 
 bool Game::Run()
 {
-	//Initialize();
-
-	//LoadContent();
-	int levelNo = 1;
-	//Board gameBoard(levelNo);
-
+	Initialize();
 	while (_window.isOpen())
 	{
 		Event event;
@@ -22,14 +17,17 @@ bool Game::Run()
 			}
 		}
 		_window.clear(Color::Black);
-
-		_window.display();
 	}
 	
 	return true;
 }
 
-void Game::LoadContent() {}
+void Game::Initialize() 
+{
+	_board = new Board(_levelNo);
+	_board->DrawBoard(_window);
+	
+}
 
 void Game::UnloadContent() {}
 

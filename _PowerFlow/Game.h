@@ -16,6 +16,8 @@ class Game
 public:
 public:
 	Game(RenderWindow & window);
+	
+	Board * _board;
 
 	bool Run();
 
@@ -23,7 +25,10 @@ public:
 
 
 private:
-	void LoadContent();
+	//level no would be assigned to this "_levelNo" from menu object
+	int _levelNo;
+
+	void Initialize();
 
 	void UnloadContent();
 

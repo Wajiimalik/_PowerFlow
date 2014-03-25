@@ -57,14 +57,18 @@ class DataBase
 	int solvedPuzzle[ROW * COL];
 	int unSolvedPuzzle[ROW * COL];
 
+	int _levelNo;
+
 public:
+	void SetLevelNo(int level);
+
 	//method for test program //in end this part would be removed
 	void AssigningValuesToFactoryHouses();
 	void AssigningValuesToConnectionType();
 	void AssigningValuesToSolvedPuzzle();
 	void AssigningValuesToUnSolvedPuzzle();
 
-	void LoadDataBase(int levelNo);
+	void LoadDataBase();
 
 	char GetObjectType(int index);
 	char GetConnectionType(int index);

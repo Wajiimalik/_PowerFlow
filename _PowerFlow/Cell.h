@@ -13,6 +13,8 @@ class Cell
 	int _indexOfThisCell;
 	Co_Ordinates _midPoint;
 
+	
+
 	ObjectState _cellState;
 	ObjectType _objectType;
 
@@ -35,6 +37,7 @@ public:
 	void SetLit();
 	void SetUnLit();
 
+	void DrawCell(RenderWindow & window, RectangleShape & rectangle);
 	void MoveObjectOfCell();
 
 	void SetIndexOfThisCell(int index);
