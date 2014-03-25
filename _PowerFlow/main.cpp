@@ -9,6 +9,5 @@ int main()
 	Game *game = new Game(window);
 	game->Run();
 	
-	
 	return 0;
 }

@@ -16,9 +16,18 @@ class Game
 public:
 public:
 	Game(RenderWindow & window);
-	RenderWindow & _window;
 
 	bool Run();
+
+	RenderWindow & _window;
+
+
+private:
+	void LoadContent();
+
+	void UnloadContent();
+
+	void Draw(RenderWindow & window);
 };
 
 #endif /* GAME_H */

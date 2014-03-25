@@ -4,6 +4,9 @@ Game::Game(RenderWindow & window) : _window(window) {}
 
 bool Game::Run()
 {
+	//Initialize();
+
+	//LoadContent();
 	int levelNo = 1;
 	//Board gameBoard(levelNo);
 
@@ -25,3 +28,9 @@ bool Game::Run()
 	
 	return true;
 }
+
+void Game::LoadContent() {}
+
+void Game::UnloadContent() {}
+
+void Game::Draw(RenderWindow & window) {}
