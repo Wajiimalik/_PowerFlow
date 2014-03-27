@@ -84,7 +84,6 @@ void Cell :: SetConnectionType(char inType)
 		case 'L':
 			_connectionType = L_Shaped;
 			_ptrConnection = new L_ShapedConnection;
-
 			this->CalculateCoords();
 			_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			break;
@@ -116,6 +115,16 @@ void Cell :: SetConnectionType(char inType)
 		}
 }
 
+void Cell :: LitAllObjects()
+{
+	if (_cellState == Lit)
+	{
+		_ptrConnection->SetLit();
+
+		if (_ptrObjects != NULL)
+			_ptrObjects->SetLit();
+	}
+}
 void Cell :: SetLit()
 {
 	_cellState = Lit;
@@ -131,6 +140,8 @@ void Cell :: DrawCell(RenderWindow & window, RectangleShape & rectangle)
 {
 	rectangle.setPosition(float(_left), float(_top));
 	window.draw(rectangle);
+
+	this->LitAllObjects();
 
 	_ptrConnection->DrawObject(window);
 	

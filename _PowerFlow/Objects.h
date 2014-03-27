@@ -69,37 +69,42 @@ protected:
 	void DrawUp(RenderWindow & window)
 	{
 		_line.setSize(Vector2f(6, -(120 / 2)));
-		_line.setFillColor(Color::Blue);
-		_line.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY()));
 		window.draw(_line);
 	}
 
 	void DrawRight(RenderWindow & window)
 	{
 		_line.setSize(Vector2f((120 / 2), 6));
-		_line.setFillColor(Color::Blue);
-		_line.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY()));
 		window.draw(_line);
 	}
 
 	void DrawDown(RenderWindow & window)
 	{
 		_line.setSize(Vector2f(6, (120 / 2)));
-		_line.setFillColor(Color::Blue);
-		_line.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY()));
 		window.draw(_line);
 	}
 
 	void DrawLeft(RenderWindow & window)
 	{
 		_line.setSize(Vector2f(-(120 / 2), 6));
-		_line.setFillColor(Color::Blue);
-		_line.setPosition(float(_ref_Coord.GetX()),float(_ref_Coord.GetY()));
 		window.draw(_line);
 	}
 
 public:
 	virtual void MoveObject() = 0;
+
+	void DrawLitOrUnlit()
+	{
+		if (_objectState == Lit)
+		{
+			_line.setFillColor(Color::Yellow);
+		}
+		else
+		{
+			_line.setFillColor(Color::Blue);
+		}
+		_line.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY()));
+	}
 
 	void CalculateRefPoint()
 	{
@@ -149,6 +154,7 @@ public:
 	void MoveObject() override {}
 	void DrawObject(RenderWindow & window) override
 	{
+		this->DrawLitOrUnlit();
 		switch (_itsPosition)
 		{
 		case Pos1:
@@ -185,6 +191,7 @@ public:
 	}
 	void DrawObject(RenderWindow & window) override
 	{
+		this->DrawLitOrUnlit();
 		switch (_itsPosition)
 		{
 		case Pos1:
@@ -225,6 +232,7 @@ public:
 	void MoveObject() override {}
 	void DrawObject(RenderWindow & window) override
 	{
+		this->DrawLitOrUnlit();
 		switch (_itsPosition)
 		{
 		case Pos1:
@@ -249,6 +257,7 @@ public:
 	void MoveObject() override {}
 	void DrawObject(RenderWindow & window) override
 	{
+		this->DrawLitOrUnlit();
 		switch (_itsPosition)
 		{
 		case Pos1:

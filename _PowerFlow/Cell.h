@@ -34,6 +34,7 @@ public:
 	void SetConnectionType(char inType);
 	void SetConnectionPostion(int inPos);
 
+	void LitAllObjects();
 	void SetLit();
 	void SetUnLit();
 
