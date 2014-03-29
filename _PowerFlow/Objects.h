@@ -11,10 +11,16 @@ class Objects
 {
 protected:
 	ObjectState _objectState;
+	Co_Ordinates _ref_Coord;
 
 public:
 	//Constructor initialize with unLit as at the start only one connection would be Lit
 	Objects() { _objectState = UnLit; }
+
+	void SetRefCoord(Co_Ordinates c)
+	{
+		_ref_Coord = c;
+	}
 
 	virtual void DrawObject(RenderWindow & window) = 0;
 
@@ -32,6 +38,12 @@ public:
 	void DrawObject(RenderWindow & window) override
 	{
 		cout << "Darwing Factory" << endl;
+
+		//FOR FAHAD
+		CircleShape c(20);
+		c.setFillColor(Color::Cyan);
+		c.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY()));
+		window.draw(c);
 	}
 
 	~Factory_Object() {}
@@ -46,7 +58,14 @@ public:
 	void DrawObject(RenderWindow & window) override
 	{
 		cout << "Darwing House" << endl;
+
+		//FOR FAHAD
+		CircleShape c(20);
+		c.setFillColor(Color::Green);
+		c.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY()));
+		window.draw(c);
 	}
+
 	~House_Object() {}
 };
 
@@ -61,7 +80,7 @@ protected:
 	Co_Ordinates _b_Coord;
 	Co_Ordinates _c_Coord;
 	Co_Ordinates _d_Coord;
-	Co_Ordinates _ref_Coord;
+
 
 	RectangleShape _line;	//for drawing
 	

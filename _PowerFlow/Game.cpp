@@ -5,6 +5,8 @@ Game::Game(RenderWindow & window) : _window(window), _levelNo(1) {}
 bool Game::Run()
 {
 	Initialize();
+	Draw();
+
 	while (_window.isOpen())
 	{
 		Event event;
@@ -25,10 +27,12 @@ bool Game::Run()
 void Game::Initialize() 
 {
 	_board = new Board(_levelNo);
-	_board->DrawBoard(_window);
 	
 }
 
-void Game::UnloadContent() {}
+void Game :: Draw()
+{
+	_board->DrawBoard(_window);
+}
 
-void Game::Draw(RenderWindow & window) {}
+void Game::UnloadContent() {}

@@ -29,10 +29,8 @@ private:
 	int _levelNo;
 
 	void Initialize();
-
+	void Draw();
 	void UnloadContent();
-
-	void Draw(RenderWindow & window);
 };
 
 #endif /* GAME_H */

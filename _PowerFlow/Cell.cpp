@@ -30,6 +30,9 @@ void Cell :: CalculateCoords()
 	//MidPt
 	_ptrConnection->CalculateRefPoint();
 	_midPoint = _ptrConnection->GetRefPt();
+	
+	if (_ptrObjects!=NULL)
+		_ptrObjects->SetRefCoord(_midPoint);
 }
 
 	
