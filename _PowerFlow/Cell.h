@@ -13,15 +13,16 @@ class Cell
 	int _indexOfThisCell;
 	Co_Ordinates _midPoint;
 
-	
+	RectangleShape _rectangle;
 
 	ObjectState _cellState;
 	ObjectType _objectType;
 
-public:
+
 	ConnectionType _connectionType;
 	ConnectionPosition _connectionPosition;
 
+public:
 	Objects *_ptrObjects;
 	Connections_Object *_ptrConnection;
 
@@ -35,15 +36,14 @@ public:
 	void SetConnectionPostion(int inPos);
 
 	void LitAllObjects();
-	void SetLit();
-	void SetUnLit();
 
-	void DrawCell(RenderWindow & window, RectangleShape & rectangle);
-	void MoveObjectOfCell();
+	void DrawCell(RenderWindow & window /*, RectangleShape & rectangle */);
+	bool GetClickedCell(int mouseX, int mouseY);
 
 	void SetIndexOfThisCell(int index);
 	int GetIndexOfThisCell();
 
+	//extras
 	ObjectType GetObjectType();
 	ConnectionType GetConnectiontype();
 	ConnectionPosition GetConnectionPosition();

@@ -14,22 +14,25 @@
 class Game
 {
 public:
-public:
 	Game(RenderWindow & window);
-	
-	Board * _board;
-
 	bool Run();
 
 	RenderWindow & _window;
 
-
 private:
 	//level no would be assigned to this "_levelNo" from menu object
+	Board * _board;
 	int _levelNo;
+
+	GameState _gameState;
+
+	int _mouseX;
+	int _mouseY;
 
 	void Initialize();
 	void Draw();
+	bool ProcessEvents();
+
 	void UnloadContent();
 };
 

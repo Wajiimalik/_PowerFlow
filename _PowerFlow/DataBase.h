@@ -14,12 +14,13 @@ using namespace std;
 #define COL 5
 
 #define CELL_LENGTH 120
+#define CONNECTION_SIZE 6
 
 enum ObjectType { Factory, House, Connection };
 enum ConnectionType { L_Shaped, T_Shaped, Straight, Mini };
 enum ConnectionPosition { Pos1, Pos2, Pos3, Pos4 };
 enum ObjectState { Lit, UnLit };
-enum GameState { Selection, Level1, Level2, Win };
+enum GameState { Selection, Level1, Level2, Level3, Level4, Level5, Win };
 enum PuzzleState { Solved, UnSolved };
 
 
@@ -59,17 +60,18 @@ class DataBase
 
 	int _levelNo;
 
-public:
-	void SetLevelNo(int level);
 
+private: //methods
 	//method for test program //in end this part would be removed
 	void AssigningValuesToFactoryHouses();
 	void AssigningValuesToConnectionType();
 	void AssigningValuesToSolvedPuzzle();
 	void AssigningValuesToUnSolvedPuzzle();
 
-	void LoadDataBase();
+public:
+	void SetLevelNo(int level);
 
+	void LoadDataBase();
 	char GetObjectType(int index);
 	char GetConnectionType(int index);
 	int GetSolvedPuzzle(int index);

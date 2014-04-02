@@ -10,10 +10,11 @@
 class Objects
 {
 protected:
-	ObjectState _objectState;
 	Co_Ordinates _ref_Coord;
 
 public:
+	ObjectState _objectState;
+
 	//Constructor initialize with unLit as at the start only one connection would be Lit
 	Objects() { _objectState = UnLit; }
 
@@ -23,9 +24,6 @@ public:
 	}
 
 	virtual void DrawObject(RenderWindow & window) = 0;
-
-	void SetLit() { _objectState = Lit; }
-	void SetUnLit() { _objectState = UnLit; }
 };
 
 
@@ -37,13 +35,7 @@ private:
 public:
 	void DrawObject(RenderWindow & window) override
 	{
-		cout << "Darwing Factory" << endl;
-
 		//FOR FAHAD
-		CircleShape c(20);
-		c.setFillColor(Color::Cyan);
-		c.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY()));
-		window.draw(c);
 	}
 
 	~Factory_Object() {}
@@ -57,13 +49,7 @@ private:
 public:
 	void DrawObject(RenderWindow & window) override
 	{
-		cout << "Darwing House" << endl;
-
 		//FOR FAHAD
-		CircleShape c(20);
-		c.setFillColor(Color::Green);
-		c.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY()));
-		window.draw(c);
 	}
 
 	~House_Object() {}
@@ -76,6 +62,8 @@ class Connections_Object : public Objects
 {
 protected:
 	ConnectionPosition _itsPosition;
+	ConnectionPosition _solvedPosition;
+
 	Co_Ordinates _a_Coord;
 	Co_Ordinates _b_Coord;
 	Co_Ordinates _c_Coord;
@@ -87,31 +75,55 @@ protected:
 
 	void DrawUp(RenderWindow & window)
 	{
-		_line.setSize(Vector2f(6, -(120 / 2)));
+		_line.setSize(Vector2f(CONNECTION_SIZE, -(CELL_LENGTH / 2)));
 		window.draw(_line);
 	}
 
 	void DrawRight(RenderWindow & window)
 	{
-		_line.setSize(Vector2f((120 / 2), 6));
+		_line.setSize(Vector2f((CELL_LENGTH / 2), CONNECTION_SIZE));
 		window.draw(_line);
 	}
 
 	void DrawDown(RenderWindow & window)
 	{
-		_line.setSize(Vector2f(6, (120 / 2)));
+		_line.setSize(Vector2f(CONNECTION_SIZE, (CELL_LENGTH / 2)));
 		window.draw(_line);
 	}
 
 	void DrawLeft(RenderWindow & window)
 	{
-		_line.setSize(Vector2f(-(120 / 2), 6));
+		_line.setSize(Vector2f(-(CELL_LENGTH / 2), CONNECTION_SIZE));
 		window.draw(_line);
 	}
 
 public:
-	virtual void MoveObject() = 0;
+	virtual void DrawObject(RenderWindow & window) = 0;
 
+	void MoveObject()
+	{
+		switch (_itsPosition)
+		{
+		case Pos1:
+			_itsPosition = Pos2;
+			break;
+
+		case Pos2:
+			_itsPosition = Pos3;
+			break;
+
+		case Pos3:
+			_itsPosition = Pos4;
+			break;
+
+		case Pos4:
+			_itsPosition = Pos1;
+			break;
+
+		default:
+			break;
+		}
+	}
 	void DrawLitOrUnlit()
 	{
 		if (_objectState == Lit)
@@ -170,7 +182,6 @@ class L_ShapedConnection : public Connections_Object
 private:
 	//for moves
 public:
-	void MoveObject() override {}
 	void DrawObject(RenderWindow & window) override
 	{
 		this->DrawLitOrUnlit();
@@ -192,8 +203,13 @@ public:
 			break;
 
 		case Pos4:
-			this->DrawUp(window);
 			this->DrawLeft(window);
+
+			//b/c of a error in drawing it is hard coded
+			_line.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY() + 6));
+			_line.setSize(Vector2f(CONNECTION_SIZE, -(CELL_LENGTH / 2 + 6)));
+			window.draw(_line);
+
 			break;
 
 		default:
@@ -206,8 +222,6 @@ class T_ShapedConnection : public Connections_Object
 {
 private:
 public:
-	void MoveObject() override {
-	}
 	void DrawObject(RenderWindow & window) override
 	{
 		this->DrawLitOrUnlit();
@@ -248,18 +262,19 @@ class StraightConnection : public Connections_Object
 
 private:
 public:
-	void MoveObject() override {}
 	void DrawObject(RenderWindow & window) override
 	{
 		this->DrawLitOrUnlit();
 		switch (_itsPosition)
 		{
 		case Pos1:
+		case Pos3:
 			this->DrawLeft(window);
 			this->DrawRight(window);
 			break;
 
 		case Pos2:
+		case Pos4:
 			this->DrawUp(window);
 			this->DrawDown(window);
 			break;
@@ -273,7 +288,6 @@ class MiniConnection : public Connections_Object
 {
 private:
 public:
-	void MoveObject() override {}
 	void DrawObject(RenderWindow & window) override
 	{
 		this->DrawLitOrUnlit();

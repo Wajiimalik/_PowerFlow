@@ -3,11 +3,6 @@
 
 Board::Board(int levelNo) : _puzzleState(UnSolved)
 {
-	_rectangle.setSize(Vector2f(CELL_LENGTH, CELL_LENGTH));
-	_rectangle.setFillColor(Color::Black);
-	_rectangle.setOutlineThickness(1);
-	_rectangle.setOutlineColor(Color::White);
-
 	DataBase.SetLevelNo(levelNo);
 	DataBase.LoadDataBase();
 
@@ -36,7 +31,7 @@ void Board :: DrawBoard(RenderWindow & window)
 	//drawing grid and assigning values to cell params
 	for (int index = 0; index < ROW * COL ; index++)
 	{
-		Cells[index].DrawCell(window, _rectangle);
+		Cells[index].DrawCell(window);
 	}
 
 	window.display();

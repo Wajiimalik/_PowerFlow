@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(RenderWindow & window) : _window(window), _levelNo(1) {}
+Game::Game(RenderWindow & window) : _window(window), _levelNo(1), _gameState(Selection), _mouseX(0), _mouseY(0) {}
 
 bool Game::Run()
 {
@@ -9,30 +9,75 @@ bool Game::Run()
 
 	while (_window.isOpen())
 	{
-		Event event;
-
-		while (_window.pollEvent(event))
+		if (ProcessEvents() == true)
 		{
-			if (event.type == Event::Closed)
+			int i;
+			for (i = 0; i < ROW*COL; i++)
 			{
-				_window.close();
+				if (_board->Cells[i].GetClickedCell(_mouseX, _mouseY))
+				{
+					_board->Cells[i]._ptrConnection->MoveObject();
+					break;
+				}
 			}
+			Draw();
 		}
-		_window.clear(Color::Black);
 	}
 	
 	return true;
 }
 
+
+
 void Game::Initialize() 
 {
 	_board = new Board(_levelNo);
-	
 }
+
+
 
 void Game :: Draw()
 {
 	_board->DrawBoard(_window);
 }
 
-void Game::UnloadContent() {}
+
+
+bool Game :: ProcessEvents()
+{
+	Event event;
+
+	while (_window.pollEvent(event))
+	{
+		//if window is closed "X"
+		if (event.type == Event :: Closed)
+		{
+			UnloadContent();
+			_window.close();
+		}
+
+		//if user has clicked on board
+		if (event.type == Event :: MouseButtonPressed)
+		{
+			if (event.mouseButton.button == Mouse :: Left)
+			{
+				_mouseX = event.mouseButton.x;
+				_mouseY = event.mouseButton.y;
+				
+				if (_mouseX > 50 && _mouseX < (50 + (120 * 5)) && _mouseY > 50 && _mouseY < (50 + (120 * 5)))
+				{
+					return true;
+				}
+				else return false;
+			}
+		}
+	}
+	return false;
+}
+
+
+
+void Game::UnloadContent()
+{
+	delete _board;
+}

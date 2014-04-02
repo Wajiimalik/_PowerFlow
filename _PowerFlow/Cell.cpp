@@ -3,13 +3,17 @@
 
 Cell::Cell() : _cellState(UnLit), _ptrObjects(NULL)
 {
-	
+	_rectangle.setSize(Vector2f(CELL_LENGTH, CELL_LENGTH));
+	_rectangle.setFillColor(Color::Black);
+	_rectangle.setOutlineThickness(1);
+	_rectangle.setOutlineColor(Color::White);
 }
 
 void Cell :: SetCell(int inLeft, int inTop)
 {
 	_left = inLeft;
 	_top = inTop;
+	_rectangle.setPosition(float(_left), float(_top));
 }
 
 void Cell :: CalculateCoords()
@@ -43,15 +47,18 @@ void Cell :: SetObjectType(char inType)
 		case 'F':
 			_objectType = Factory;
 			_ptrObjects = new Factory_Object;
-			this->SetLit();
+			this->_cellState = Lit;
 			break;
+
 		case 'H':
 			_objectType = House;
 			_ptrObjects = new House_Object;
 			break;
+
 		case 'C':
 			_objectType = Connection;
 			break;
+
 		default:
 			cout << "InValid Object Type" << endl;
 			break;
@@ -122,27 +129,20 @@ void Cell :: LitAllObjects()
 {
 	if (_cellState == Lit)
 	{
-		_ptrConnection->SetLit();
+		_ptrConnection->_objectState = Lit;
 
 		if (_ptrObjects != NULL)
-			_ptrObjects->SetLit();
+			_ptrObjects->_objectState = Lit;
 	}
-}
-void Cell :: SetLit()
-{
-	_cellState = Lit;
-	//set also object state of object
+	return;
 }
 
-void Cell :: SetUnLit()
-{
-	_cellState = UnLit;
-}
 
-void Cell :: DrawCell(RenderWindow & window, RectangleShape & rectangle)
+void Cell :: DrawCell(RenderWindow & window /*, RectangleShape & rectangle*/)
 {
-	rectangle.setPosition(float(_left), float(_top));
-	window.draw(rectangle);
+	//_rectangle.setPosition(float(_left), float(_top));
+
+	window.draw(_rectangle);
 
 	this->LitAllObjects();
 
@@ -155,11 +155,16 @@ void Cell :: DrawCell(RenderWindow & window, RectangleShape & rectangle)
 	}
 }
 
-//we have get clicked cell
-void Cell :: MoveObjectOfCell()
+//To find user have clicked on which cell (return its index)
+bool Cell :: GetClickedCell(int mouseX, int mouseY)
 {
-	_ptrConnection->MoveObject();
+	if (mouseX > _left && mouseX < _left + CELL_LENGTH && mouseY >_top && mouseY < _top + CELL_LENGTH)
+	{
+		return true;
+	}
+	return false;
 }
+
 
 void Cell :: SetIndexOfThisCell(int index)
 {
