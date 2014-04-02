@@ -19,23 +19,27 @@ class Cell
 	ObjectType _objectType;
 
 
-	ConnectionType _connectionType;
+	//ConnectionType _connectionType;
 	ConnectionPosition _connectionPosition;
 
 public:
 	Objects *_ptrObjects;
 	Connections_Object *_ptrConnection;
 
+private:
+	void CalculateCoords();
+	void LitAllObjects();
+
 public:
 	Cell();
 	void SetCell(int inLeft, int inTop);
-	void CalculateCoords();
+	
 
 	void SetObjectType(char inType);
 	void SetConnectionType(char inType);
-	void SetConnectionPostion(int inPos);
+	//void SetConnectionPostion(int inPos);
 
-	void LitAllObjects();
+	
 
 	void DrawCell(RenderWindow & window /*, RectangleShape & rectangle */);
 	bool GetClickedCell(int mouseX, int mouseY);

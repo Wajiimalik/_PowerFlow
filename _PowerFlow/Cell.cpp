@@ -65,6 +65,7 @@ void Cell :: SetObjectType(char inType)
 		}
 }
 
+/*
 void Cell::SetConnectionPostion(int inPos)
 {
 	switch (inPos)
@@ -85,6 +86,7 @@ void Cell::SetConnectionPostion(int inPos)
 		cout << "InValid ConnectionPosition" << endl;
 	}
 }
+*/
 
 //not in set object type method b/c these connections will be in each cell
 void Cell :: SetConnectionType(char inType)
@@ -92,31 +94,34 @@ void Cell :: SetConnectionType(char inType)
 		switch (inType)
 		{
 		case 'L':
-			_connectionType = L_Shaped;
+			
 			_ptrConnection = new L_ShapedConnection;
+			_ptrConnection->_connectionType = L_Shaped;
 			this->CalculateCoords();
-			_ptrConnection->SetConnectionsPosition(_connectionPosition);
+			//_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			break;
 
 		case 'T':
-			_connectionType = T_Shaped;
+			
 			_ptrConnection = new T_ShapedConnection;
+			_ptrConnection->_connectionType = T_Shaped;
 			this->CalculateCoords();
-			_ptrConnection->SetConnectionsPosition(_connectionPosition);
+			//_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			break;
 
 		case 'S':
-			_connectionType = Straight;
+			
 			_ptrConnection = new StraightConnection;
+			_ptrConnection->_connectionType = Straight;
 			this->CalculateCoords();
-			_ptrConnection->SetConnectionsPosition(_connectionPosition);
+			//_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			break;
 
 		case 'M':
-			_connectionType = Mini;
 			_ptrConnection = new MiniConnection;
+			_ptrConnection->_connectionType = Mini;
 			this->CalculateCoords();
-			_ptrConnection->SetConnectionsPosition(_connectionPosition);
+			//_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			break;
 
 		default:
@@ -153,6 +158,9 @@ void Cell :: DrawCell(RenderWindow & window /*, RectangleShape & rectangle*/)
 	{
 		_ptrObjects->DrawObject(window);
 	}
+
+	/// ****** ERROR ******* ///
+	//window.display();
 }
 
 //To find user have clicked on which cell (return its index)
@@ -181,10 +189,12 @@ ObjectType Cell :: GetObjectType()
 	return _objectType;
 }
 
+/*
 ConnectionType Cell :: GetConnectiontype()
 {
 	return _connectionType;
 }
+*/
 
 ConnectionPosition Cell :: GetConnectionPosition()
 {

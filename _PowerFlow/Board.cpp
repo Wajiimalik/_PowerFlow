@@ -20,8 +20,10 @@ Board::Board(int levelNo) : _puzzleState(UnSolved)
 	{
 		Cells[i].SetIndexOfThisCell(i);
 		Cells[i].SetObjectType(DataBase.GetObjectType(i));
-		Cells[i].SetConnectionPostion(DataBase.GetUnSolvedPuzzle(i));
+		//Cells[i].SetConnectionPostion(DataBase.GetUnSolvedPuzzle(i));
 		Cells[i].SetConnectionType(DataBase.GetConnectionType(i));
+		Cells[i]._ptrConnection->SetConnectionPosition(DataBase.GetUnSolvedPuzzle(i));
+		Cells[i]._ptrConnection->SetSolvedConnectionPosition(DataBase.GetSolvedPuzzle(i));
 	}
 
 }
@@ -35,17 +37,4 @@ void Board :: DrawBoard(RenderWindow & window)
 	}
 
 	window.display();
-}
-
-bool Board :: CheckCellsState()
-{
-	//compares coord of connection to check lit or unlit
-	//then call cell setlit
-	return true;
-}
-
-bool Board :: CheckPuzzleState()
-{
-	//if solved then game over
-	return true;
 }

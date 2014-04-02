@@ -69,7 +69,7 @@
 
 		solvedPuzzle[15] = 1; solvedPuzzle[16] = 4; solvedPuzzle[17] = 3; solvedPuzzle[18] = 1; solvedPuzzle[19] = 2;
 
-		solvedPuzzle[20] = 2; solvedPuzzle[21] = 1; solvedPuzzle[22] = 3; solvedPuzzle[23] = 2; solvedPuzzle[24] = 4;
+		solvedPuzzle[20] = 2; solvedPuzzle[21] = 1; solvedPuzzle[22] = 3; solvedPuzzle[23] = 1; solvedPuzzle[24] = 4;
 
 	}
 

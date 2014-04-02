@@ -33,6 +33,8 @@ private:
 	void Draw();
 	bool ProcessEvents();
 
+	bool GameOver();
+
 	void UnloadContent();
 };
 

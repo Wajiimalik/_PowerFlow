@@ -18,9 +18,5 @@ public:
 	Board(int levelNo);
 
 	void DrawBoard(RenderWindow & window);
-
-	bool CheckCellsState();
-
-	bool CheckPuzzleState();
 };
 //#endif /* BOARD_H */

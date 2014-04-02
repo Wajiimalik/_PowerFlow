@@ -61,18 +61,21 @@ public:
 class Connections_Object : public Objects
 {
 protected:
-	ConnectionPosition _itsPosition;
-	ConnectionPosition _solvedPosition;
-
 	Co_Ordinates _a_Coord;
 	Co_Ordinates _b_Coord;
 	Co_Ordinates _c_Coord;
 	Co_Ordinates _d_Coord;
 
-
+	
 	RectangleShape _line;	//for drawing
 	
+public:
+	ConnectionPosition _itsPosition;
+	ConnectionPosition _solvedPosition;
 
+	ConnectionType _connectionType;
+
+protected:
 	void DrawUp(RenderWindow & window)
 	{
 		_line.setSize(Vector2f(CONNECTION_SIZE, -(CELL_LENGTH / 2)));
@@ -100,7 +103,7 @@ protected:
 public:
 	virtual void DrawObject(RenderWindow & window) = 0;
 
-	void MoveObject()
+	void MoveConnection()
 	{
 		switch (_itsPosition)
 		{
@@ -109,7 +112,11 @@ public:
 			break;
 
 		case Pos2:
-			_itsPosition = Pos3;
+			if (_connectionType == Straight)
+				_itsPosition = Pos1;
+			else
+				_itsPosition = Pos3;
+
 			break;
 
 		case Pos3:
@@ -124,6 +131,7 @@ public:
 			break;
 		}
 	}
+
 	void DrawLitOrUnlit()
 	{
 		if (_objectState == Lit)
@@ -143,11 +151,47 @@ public:
 		_ref_Coord.SetY((_a_Coord.GetY() + _c_Coord.GetY()) / 2);
 	}
 
-	void SetConnectionsPosition(ConnectionPosition c)
+	void SetConnectionPosition(/*ConnectionPosition c*/ int inPos)
 	{
-		_itsPosition = c;
+		switch (inPos)
+		{
+		case 1:
+			_itsPosition = Pos1;
+			break;
+		case 2:
+			_itsPosition = Pos2;
+			break;
+		case 3:
+			_itsPosition = Pos3;
+			break;
+		case 4:
+			_itsPosition = Pos4;
+			break;
+		default:
+			cout << "InValid ConnectionPosition" << endl;
+		}
 	}
 
+	void SetSolvedConnectionPosition(/*ConnectionPosition c*/ int inPos)
+	{
+		switch (inPos)
+		{
+		case 1:
+			_solvedPosition = Pos1;
+			break;
+		case 2:
+			_solvedPosition = Pos2;
+			break;
+		case 3:
+			_solvedPosition = Pos3;
+			break;
+		case 4:
+			_solvedPosition = Pos4;
+			break;
+		default:
+			cout << "InValid ConnectionPosition" << endl;
+		}
+	}
 	void Set_a_Coord(int x, int y)
 	{
 		_a_Coord.SetX(x);
@@ -206,10 +250,12 @@ public:
 			this->DrawLeft(window);
 
 			//b/c of a error in drawing it is hard coded
+			
 			_line.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY() + 6));
 			_line.setSize(Vector2f(CONNECTION_SIZE, -(CELL_LENGTH / 2 + 6)));
 			window.draw(_line);
-
+			
+			//this->DrawUp(window);
 			break;
 
 		default:
@@ -268,13 +314,11 @@ public:
 		switch (_itsPosition)
 		{
 		case Pos1:
-		case Pos3:
 			this->DrawLeft(window);
 			this->DrawRight(window);
 			break;
 
 		case Pos2:
-		case Pos4:
 			this->DrawUp(window);
 			this->DrawDown(window);
 			break;

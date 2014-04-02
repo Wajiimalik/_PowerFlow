@@ -16,11 +16,22 @@ bool Game::Run()
 			{
 				if (_board->Cells[i].GetClickedCell(_mouseX, _mouseY))
 				{
-					_board->Cells[i]._ptrConnection->MoveObject();
+					_board->Cells[i]._ptrConnection->MoveConnection();
+					//_board->Cells[i].DrawCell(_window);
+					Draw();
+					GameOver();
 					break;
 				}
 			}
-			Draw();
+			//Draw();
+			if (_gameState == Win)
+			{
+				cout << "GAME OVER! ";
+				CircleShape c(100);
+				_window.draw(c);
+				_window.display();
+				break;
+			}
 		}
 	}
 	
@@ -75,7 +86,24 @@ bool Game :: ProcessEvents()
 	return false;
 }
 
-
+bool Game ::GameOver()
+{
+	int count = 0;
+	
+	for (int i = 0; i < ROW * COL; i++)
+	{
+		if (_board->Cells[i]._ptrConnection->_itsPosition != _board->Cells[i]._ptrConnection->_solvedPosition)
+		{
+			count++;
+		}
+	}
+		if (count == 0)
+		{
+			_gameState = Win;
+			return true;
+		}
+		return false;
+}
 
 void Game::UnloadContent()
 {
