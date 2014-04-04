@@ -66,7 +66,7 @@ public:
 		window.draw(House);
 	}
 
-	//~House_Object() {}
+	~House_Object() {}
 };
 
 
