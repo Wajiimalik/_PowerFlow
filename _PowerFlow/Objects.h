@@ -36,9 +36,15 @@ public:
 	void DrawObject(RenderWindow & window) override
 	{
 		//FOR FAHAD
+			sf::Sprite Factory;
+		sf::Texture t;
+		t.loadFromFile("Pic\\Factory.png");
+		Factory.setTexture( t );
+		Factory.setPosition(float(_ref_Coord.GetX() - 30), float(_ref_Coord.GetY() - 30));
+		window.draw(Factory);
 	}
 
-	~Factory_Object() {}
+	//~Factory_Object() {}
 };
 
 
@@ -50,9 +56,17 @@ public:
 	void DrawObject(RenderWindow & window) override
 	{
 		//FOR FAHAD
+
+
+		sf::Sprite House;
+		sf::Texture t;
+		t.loadFromFile("Pic\\House.png");
+		House.setTexture( t );
+		House.setPosition(float(_ref_Coord.GetX() - 40), float(_ref_Coord.GetY() - 40));
+		window.draw(House);
 	}
 
-	~House_Object() {}
+	//~House_Object() {}
 };
 
 
