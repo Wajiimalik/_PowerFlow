@@ -1,5 +1,6 @@
 _PowerFlow/Debug
 Debug
+Release
 ipch
 *.user
 *.opensdf
