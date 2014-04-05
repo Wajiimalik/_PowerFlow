@@ -1,6 +1,8 @@
 #include "Game.h"
 
-Game::Game(RenderWindow & window) : _window(window), _levelNo(1), _gameState(Selection), _mouseX(0), _mouseY(0) {}
+Game::Game(RenderWindow & window) 
+	: _window(window), _levelNo(1), _gameState(Selection), _mouseX(0), _mouseY(0) {}
+
 
 bool Game::Run()
 {
@@ -23,7 +25,7 @@ bool Game::Run()
 					break;
 				}
 			}
-			//Draw();
+
 			if (_gameState == Win)
 			{
 				cout << "GAME OVER! ";
@@ -38,21 +40,25 @@ bool Game::Run()
 	return true;
 }
 
-
-
 void Game::Initialize() 
 {
+	LoadContent();
 	_board = new Board(_levelNo);
+	for (int i = 0; i < ROW*COL; i++)
+	{
+		if (_board->Cells[i]._objectType == Factory)
+			_board->Cells[i]._ptrObjects->SetTexture(factory);
+
+		if (_board->Cells[i]._objectType == House)
+			_board->Cells[i]._ptrObjects->SetTexture(house);
+	}
+	
 }
-
-
 
 void Game :: Draw()
 {
 	_board->DrawBoard(_window);
 }
-
-
 
 bool Game :: ProcessEvents()
 {
@@ -99,10 +105,18 @@ bool Game ::GameOver()
 	}
 		if (count == 0)
 		{
+			UnloadContent();
 			_gameState = Win;
 			return true;
 		}
 		return false;
+}
+
+void Game :: LoadContent()
+{
+	factory.loadFromFile("Pic\\Factory.png");
+
+	house.loadFromFile("Pic\\House.png");
 }
 
 void Game::UnloadContent()

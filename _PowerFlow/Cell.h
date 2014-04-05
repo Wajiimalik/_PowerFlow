@@ -1,6 +1,4 @@
 #pragma once
-//#ifndef CELL_H
-//#define CELL_H
 
 #include "DataBase.h"
 #include "Objects.h"
@@ -15,14 +13,12 @@ class Cell
 
 	RectangleShape _rectangle;
 
-	ObjectState _cellState;
-	ObjectType _objectType;
-
-
-	//ConnectionType _connectionType;
 	ConnectionPosition _connectionPosition;
 
 public:
+	ObjectState _cellState;
+	ObjectType _objectType;
+
 	Objects *_ptrObjects;
 	Connections_Object *_ptrConnection;
 
@@ -33,27 +29,16 @@ private:
 public:
 	Cell();
 	void SetCell(int inLeft, int inTop);
-	
 
 	void SetObjectType(char inType);
 	void SetConnectionType(char inType);
-	//void SetConnectionPostion(int inPos);
 
-	
 
-	void DrawCell(RenderWindow & window /*, RectangleShape & rectangle */);
+	void DrawCell(RenderWindow & window);
 	bool GetClickedCell(int mouseX, int mouseY);
 
 	void SetIndexOfThisCell(int index);
 	int GetIndexOfThisCell();
 
-	//extras
-	ObjectType GetObjectType();
-	ConnectionType GetConnectiontype();
-	ConnectionPosition GetConnectionPosition();
-
-	int GetLeftOfCell();
-	int GetTopOfCell();
 };
 
-//#endif /* CELL_H */

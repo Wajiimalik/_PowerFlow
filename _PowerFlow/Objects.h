@@ -1,12 +1,8 @@
 #pragma once
-//#ifndef OBJECTS_H
-//#define OBJECTS_H
-
-//#include "DataBase.h"
 
 #include "Cell.h"
 
-//abstract class for all objects
+//abstract class for factory and house
 class Objects
 {
 protected:
@@ -15,13 +11,14 @@ protected:
 public:
 	ObjectState _objectState;
 
-	//Constructor initialize with unLit as at the start only one connection would be Lit
 	Objects() { _objectState = UnLit; }
 
 	void SetRefCoord(Co_Ordinates c)
 	{
 		_ref_Coord = c;
 	}
+
+	virtual void SetTexture(Texture & t) = 0;
 
 	virtual void DrawObject(RenderWindow & window) = 0;
 };
@@ -31,20 +28,22 @@ public:
 class Factory_Object : public Objects
 {
 private:
+	Sprite _Factory;
 
 public:
-	void DrawObject(RenderWindow & window) override
+	 void SetTexture(Texture & factory) 
 	{
-		//FOR FAHAD
-			sf::Sprite Factory;
-		sf::Texture t;
-		t.loadFromFile("Pic\\Factory.png");
-		Factory.setTexture( t );
-		Factory.setPosition(float(_ref_Coord.GetX() - 30), float(_ref_Coord.GetY() - 30));
-		window.draw(Factory);
+		_Factory.setTexture(factory);
+		_Factory.setPosition(float(_ref_Coord.GetX() -40), float(_ref_Coord.GetY() - 30 ));
 	}
 
-	//~Factory_Object() {}
+	void DrawObject(RenderWindow & window) override
+	{
+		
+		window.draw(_Factory);
+	}
+
+	~Factory_Object() {}
 };
 
 
@@ -52,18 +51,18 @@ public:
 class House_Object : public Objects
 {
 private:
+	Sprite _House;
+
 public:
+	void SetTexture(Texture & house)
+	{
+		_House.setTexture(house);
+		_House.setPosition(float(_ref_Coord.GetX() - 30), float(_ref_Coord.GetY() - 40));
+	}
+
 	void DrawObject(RenderWindow & window) override
 	{
-		//FOR FAHAD
-
-
-		sf::Sprite House;
-		sf::Texture t;
-		t.loadFromFile("Pic\\House.png");
-		House.setTexture( t );
-		House.setPosition(float(_ref_Coord.GetX() - 40), float(_ref_Coord.GetY() - 40));
-		window.draw(House);
+		window.draw(_House);
 	}
 
 	~House_Object() {}
@@ -72,18 +71,20 @@ public:
 
 
 //Connections Object (abstract class)
-class Connections_Object : public Objects
+class Connections_Object
 {
 protected:
+	Co_Ordinates _ref_Coord;
+
 	Co_Ordinates _a_Coord;
 	Co_Ordinates _b_Coord;
 	Co_Ordinates _c_Coord;
 	Co_Ordinates _d_Coord;
-
 	
 	RectangleShape _line;	//for drawing
 	
 public:
+	ObjectState _objectState;
 	ConnectionPosition _itsPosition;
 	ConnectionPosition _solvedPosition;
 
@@ -115,6 +116,8 @@ protected:
 	}
 
 public:
+	Connections_Object() { _objectState = UnLit; }
+
 	virtual void DrawObject(RenderWindow & window) = 0;
 
 	void MoveConnection()
@@ -142,6 +145,7 @@ public:
 			break;
 
 		default:
+			cout << endl << "Invalid Connection Position" << endl;
 			break;
 		}
 	}
@@ -150,6 +154,7 @@ public:
 	{
 		if (_objectState == Lit)
 		{
+			
 			_line.setFillColor(Color::Yellow);
 		}
 		else
@@ -165,7 +170,7 @@ public:
 		_ref_Coord.SetY((_a_Coord.GetY() + _c_Coord.GetY()) / 2);
 	}
 
-	void SetConnectionPosition(/*ConnectionPosition c*/ int inPos)
+	void SetConnectionPosition(int inPos)
 	{
 		switch (inPos)
 		{
@@ -186,7 +191,7 @@ public:
 		}
 	}
 
-	void SetSolvedConnectionPosition(/*ConnectionPosition c*/ int inPos)
+	void SetSolvedConnectionPosition(int inPos)
 	{
 		switch (inPos)
 		{
@@ -206,6 +211,7 @@ public:
 			cout << "InValid ConnectionPosition" << endl;
 		}
 	}
+
 	void Set_a_Coord(int x, int y)
 	{
 		_a_Coord.SetX(x);
@@ -217,16 +223,19 @@ public:
 		_b_Coord.SetX(x);
 		_b_Coord.SetY(y);
 	}
+
 	void Set_c_Coord(int x, int y)
 	{
 		_c_Coord.SetX(x);
 		_c_Coord.SetY(y);
 	}
+
 	void Set_d_Coord(int x, int y)
 	{
 		_d_Coord.SetX(x);
 		_d_Coord.SetY(y);
 	}
+
 
 	Co_Ordinates GetRefPt()
 	{
@@ -237,12 +246,11 @@ public:
 //devived types of connection
 class L_ShapedConnection : public Connections_Object
 {
-private:
-	//for moves
 public:
 	void DrawObject(RenderWindow & window) override
 	{
 		this->DrawLitOrUnlit();
+
 		switch (_itsPosition)
 		{
 		case Pos1:
@@ -264,9 +272,9 @@ public:
 			this->DrawLeft(window);
 
 			//b/c of a error in drawing it is hard coded
-			
-			_line.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY() + 6));
-			_line.setSize(Vector2f(CONNECTION_SIZE, -(CELL_LENGTH / 2 + 6)));
+			_line.setPosition(float(_ref_Coord.GetX()), float(_ref_Coord.GetY() + 8));
+			_line.setSize(Vector2f(CONNECTION_SIZE, -(CELL_LENGTH / 2 + 8)));
+
 			window.draw(_line);
 			
 			//this->DrawUp(window);
@@ -280,11 +288,11 @@ public:
 
 class T_ShapedConnection : public Connections_Object
 {
-private:
 public:
 	void DrawObject(RenderWindow & window) override
 	{
 		this->DrawLitOrUnlit();
+
 		switch (_itsPosition)
 		{
 		case Pos1:
@@ -319,12 +327,11 @@ public:
 
 class StraightConnection : public Connections_Object
 {
-
-private:
 public:
 	void DrawObject(RenderWindow & window) override
 	{
 		this->DrawLitOrUnlit();
+
 		switch (_itsPosition)
 		{
 		case Pos1:
@@ -336,6 +343,7 @@ public:
 			this->DrawUp(window);
 			this->DrawDown(window);
 			break;
+
 		default:
 			cout << endl << "Invalid Connection Position" << endl;
 		}
@@ -344,11 +352,11 @@ public:
 
 class MiniConnection : public Connections_Object
 {
-private:
 public:
 	void DrawObject(RenderWindow & window) override
 	{
 		this->DrawLitOrUnlit();
+
 		switch (_itsPosition)
 		{
 		case Pos1:
@@ -372,93 +380,3 @@ public:
 		}
 	}
 };
-
-/*
-class Objects
-{
-protected:
-ObjectState _objectState;
-
-public:
-Objects();
-virtual void DrawObject() = 0;
-void SetLit();
-void SetUnLit();
-};
-
-//Factory Object
-class Factory_Object : public Objects
-{
-void DrawObject() override;
-
-~Factory_Object() {}
-};
-
-//House Object
-class House_Object : public Objects
-{
-public:
-void DrawObject() override;
-~House_Object() {}
-};
-
-
-//Connections Object (abstract class)
-class Connections_Object : public Objects
-{
-protected:
-ConnectionPosition _itsPosition;
-Co_Ordinates _a_Coord;
-Co_Ordinates _b_Coord;
-Co_Ordinates _c_Coord;
-Co_Ordinates _d_Coord;
-Co_Ordinates _ref_Coord;
-RectangleShape line;	//for drawing
-
-public:
-virtual void MoveObject() = 0;
-void CalculateRefPoint();
-void DrawUp();
-void DrawRight();
-void DrawDown();
-void DrawLeft();
-void SetConnectionsPosition(ConnectionPosition c);
-void Set_a_Coord(int x, int y);
-void Set_b_Coord(int x, int y);
-void Set_c_Coord(int x, int y);
-void Set_d_Coord(int x, int y);
-Co_Ordinates GetRefPt();
-
-};
-
-//devived types of connection
-class L_ShapedConnection : public Connections_Object
-{
-public:
-void MoveObject() override;
-void DrawObject() override;
-};
-
-class T_ShapedConnection : public Connections_Object
-{
-public:
-void MoveObject() override;
-void DrawObject() override;
-};
-
-class StraightConnection : public Connections_Object
-{
-public:
-void MoveObject() override;
-void DrawObject() override;
-};
-
-class MiniConnection : public Connections_Object
-{
-public:
-void MoveObject() override;
-void DrawObject() override;
-};
-
-//#endif //
-*/

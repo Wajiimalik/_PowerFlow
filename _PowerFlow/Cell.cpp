@@ -65,29 +65,6 @@ void Cell :: SetObjectType(char inType)
 		}
 }
 
-/*
-void Cell::SetConnectionPostion(int inPos)
-{
-	switch (inPos)
-	{
-	case 1:
-		_connectionPosition = Pos1;
-		break;
-	case 2:
-		_connectionPosition = Pos2;
-		break;
-	case 3:
-		_connectionPosition = Pos3;
-		break;
-	case 4:
-		_connectionPosition = Pos4;
-		break;
-	default:
-		cout << "InValid ConnectionPosition" << endl;
-	}
-}
-*/
-
 //not in set object type method b/c these connections will be in each cell
 void Cell :: SetConnectionType(char inType)
 {
@@ -98,7 +75,6 @@ void Cell :: SetConnectionType(char inType)
 			_ptrConnection = new L_ShapedConnection;
 			_ptrConnection->_connectionType = L_Shaped;
 			this->CalculateCoords();
-			//_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			break;
 
 		case 'T':
@@ -106,7 +82,6 @@ void Cell :: SetConnectionType(char inType)
 			_ptrConnection = new T_ShapedConnection;
 			_ptrConnection->_connectionType = T_Shaped;
 			this->CalculateCoords();
-			//_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			break;
 
 		case 'S':
@@ -114,14 +89,12 @@ void Cell :: SetConnectionType(char inType)
 			_ptrConnection = new StraightConnection;
 			_ptrConnection->_connectionType = Straight;
 			this->CalculateCoords();
-			//_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			break;
 
 		case 'M':
 			_ptrConnection = new MiniConnection;
 			_ptrConnection->_connectionType = Mini;
 			this->CalculateCoords();
-			//_ptrConnection->SetConnectionsPosition(_connectionPosition);
 			break;
 
 		default:
@@ -143,9 +116,8 @@ void Cell :: LitAllObjects()
 }
 
 
-void Cell :: DrawCell(RenderWindow & window /*, RectangleShape & rectangle*/)
+void Cell :: DrawCell(RenderWindow & window)
 {
-	//_rectangle.setPosition(float(_left), float(_top));
 
 	window.draw(_rectangle);
 
@@ -153,7 +125,6 @@ void Cell :: DrawCell(RenderWindow & window /*, RectangleShape & rectangle*/)
 
 	_ptrConnection->DrawObject(window);
 	
-	//b/c not all cells are using this ptr
 	if (_ptrObjects != NULL)
 	{
 		_ptrObjects->DrawObject(window);
@@ -182,31 +153,4 @@ void Cell :: SetIndexOfThisCell(int index)
 int Cell :: GetIndexOfThisCell()
 {
 	return _indexOfThisCell;
-}
-
-ObjectType Cell :: GetObjectType()
-{
-	return _objectType;
-}
-
-/*
-ConnectionType Cell :: GetConnectiontype()
-{
-	return _connectionType;
-}
-*/
-
-ConnectionPosition Cell :: GetConnectionPosition()
-{
-	return _connectionPosition;
-}
-
-int Cell :: GetLeftOfCell()
-{
-	return _left;
-}
-
-int Cell :: GetTopOfCell()
-{
-	return _top;
 }

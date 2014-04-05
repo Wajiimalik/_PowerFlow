@@ -1,6 +1,4 @@
 #pragma once
-//#ifndef BOARD_H
-//#define BOARD_H
 
 #include "database.h"
 #include "Cell.h"
@@ -19,4 +17,3 @@ public:
 
 	void DrawBoard(RenderWindow & window);
 };
-//#endif /* BOARD_H */

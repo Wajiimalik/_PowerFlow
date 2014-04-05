@@ -1,6 +1,4 @@
 #pragma once
-#ifndef GAME_H
-#define GAME_H
 
 #include <iostream>
 #include <string>
@@ -26,6 +24,9 @@ private:
 
 	GameState _gameState;
 
+	Texture factory;
+	Texture house;
+
 	int _mouseX;
 	int _mouseY;
 
@@ -35,7 +36,6 @@ private:
 
 	bool GameOver();
 
+	void LoadContent();
 	void UnloadContent();
 };
-
-#endif /* GAME_H */

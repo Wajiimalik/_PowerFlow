@@ -1,7 +1,4 @@
 #pragma once
-//#ifndef DATABASE_H
-//#define DATABASEH
-
 
 #include <SFML/Graphics.hpp>
 #include <string>
@@ -14,7 +11,7 @@ using namespace std;
 #define COL 5
 
 #define CELL_LENGTH 120
-#define CONNECTION_SIZE 6
+#define CONNECTION_SIZE 8
 
 enum ObjectType { Factory, House, Connection };
 enum ConnectionType { L_Shaped, T_Shaped, Straight, Mini };
@@ -77,4 +74,3 @@ public:
 	int GetSolvedPuzzle(int index);
 	int GetUnSolvedPuzzle(int index);
 };
-//#endif /* DATABASE_H */
