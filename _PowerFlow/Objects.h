@@ -18,7 +18,7 @@ public:
 		_ref_Coord = c;
 	}
 
-	virtual void SetTexture(Texture & t) = 0;
+	virtual void SetTexture(Texture & t, Texture & v) = 0;
 
 	virtual void DrawObject(RenderWindow & window) = 0;
 };
@@ -31,10 +31,15 @@ private:
 	Sprite _Factory;
 
 public:
-	 void SetTexture(Texture & factory) 
+	Factory_Object()
+	{
+		_objectState = Lit;
+	}
+
+	 void SetTexture(Texture & factory, Texture & v) override
 	{
 		_Factory.setTexture(factory);
-		_Factory.setPosition(float(_ref_Coord.GetX() -40), float(_ref_Coord.GetY() - 30 ));
+		_Factory.setPosition(float(_ref_Coord.GetX() -40), float(_ref_Coord.GetY() - 45 ));
 	}
 
 	void DrawObject(RenderWindow & window) override
@@ -51,18 +56,34 @@ public:
 class House_Object : public Objects
 {
 private:
-	Sprite _House;
+	Sprite _HouseLit;
+	Sprite _HouseUnLit;
 
 public:
-	void SetTexture(Texture & house)
+	House_Object()
 	{
-		_House.setTexture(house);
-		_House.setPosition(float(_ref_Coord.GetX() - 30), float(_ref_Coord.GetY() - 40));
+		_objectState = UnLit;
+	}
+
+	void SetTexture(Texture & houseLit, Texture & houseUnLit) override
+	{
+		_HouseLit.setTexture(houseLit);
+		_HouseUnLit.setTexture(houseUnLit);
+
+		_HouseLit.setPosition(float(_ref_Coord.GetX() - 32), float(_ref_Coord.GetY() - 40));
+		_HouseUnLit.setPosition(float(_ref_Coord.GetX() - 32), float(_ref_Coord.GetY() - 40));
 	}
 
 	void DrawObject(RenderWindow & window) override
 	{
-		window.draw(_House);
+		if (_objectState == Lit)
+		{
+			window.draw(_HouseLit);
+		}
+		if (_objectState == UnLit)
+		{
+			window.draw(_HouseUnLit);
+		}
 	}
 
 	~House_Object() {}

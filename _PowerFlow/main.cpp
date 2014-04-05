@@ -3,8 +3,7 @@
 
 int main()
 {
-	
-	RenderWindow window(VideoMode(900, 700), "POWER FLOW");
+	RenderWindow window(VideoMode(900, 700), "POWER FLOW", Style::Close);
 
 	Game *game = new Game(window);
 	game->Run();

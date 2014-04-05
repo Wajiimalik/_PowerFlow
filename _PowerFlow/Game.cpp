@@ -1,7 +1,10 @@
 #include "Game.h"
 
 Game::Game(RenderWindow & window) 
-	: _window(window), _levelNo(1), _gameState(Selection), _mouseX(0), _mouseY(0) {}
+: _window(window), _levelNo(1), _gameState(Selection), _mouseX(0), _mouseY(0) 
+{
+	LoadContent(); 
+}
 
 
 bool Game::Run()
@@ -44,19 +47,21 @@ void Game::Initialize()
 {
 	LoadContent();
 	_board = new Board(_levelNo);
+	
+	//setting textures of house and factory
 	for (int i = 0; i < ROW*COL; i++)
 	{
 		if (_board->Cells[i]._objectType == Factory)
-			_board->Cells[i]._ptrObjects->SetTexture(factory);
+			_board->Cells[i]._ptrObjects->SetTexture(factory, factory);
 
 		if (_board->Cells[i]._objectType == House)
-			_board->Cells[i]._ptrObjects->SetTexture(house);
-	}
-	
+			_board->Cells[i]._ptrObjects->SetTexture(house, houseUnLit);
+	} 
 }
 
 void Game :: Draw()
 {
+	
 	_board->DrawBoard(_window);
 }
 
@@ -117,6 +122,8 @@ void Game :: LoadContent()
 	factory.loadFromFile("Pic\\Factory.png");
 
 	house.loadFromFile("Pic\\House.png");
+
+	houseUnLit.loadFromFile("Pic\\HouseUnLit.png");
 }
 
 void Game::UnloadContent()

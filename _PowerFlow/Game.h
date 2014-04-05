@@ -26,6 +26,7 @@ private:
 
 	Texture factory;
 	Texture house;
+	Texture houseUnLit;
 
 	int _mouseX;
 	int _mouseY;

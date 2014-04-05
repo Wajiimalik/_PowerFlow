@@ -38,7 +38,6 @@ void Cell :: CalculateCoords()
 	if (_ptrObjects!=NULL)
 		_ptrObjects->SetRefCoord(_midPoint);
 }
-
 	
 void Cell :: SetObjectType(char inType)
 {
@@ -109,7 +108,7 @@ void Cell :: LitAllObjects()
 	{
 		_ptrConnection->_objectState = Lit;
 
-		if (_ptrObjects != NULL)
+		if (_ptrObjects != NULL)	//All cells are not H or F
 			_ptrObjects->_objectState = Lit;
 	}
 	return;
