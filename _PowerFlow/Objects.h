@@ -193,8 +193,11 @@ public:
 
 	void SetConnectionPosition(int inPos)
 	{
-		switch (inPos)
+		cout<<" inPos"<<inPos <<endl;
+		
+		switch(inPos)
 		{
+			
 		case 1:
 			_itsPosition = Pos1;
 			break;
@@ -208,12 +211,18 @@ public:
 			_itsPosition = Pos4;
 			break;
 		default:
-			cout << "InValid ConnectionPosition" << endl;
+			cout<<" inPos"<<inPos <<endl;
+			cout << "InValid ConnectionPosition 6 " << endl;
 		}
+
+
+		
+
 	}
 
 	void SetSolvedConnectionPosition(int inPos)
 	{
+		
 		switch (inPos)
 		{
 		case 1:
@@ -229,7 +238,7 @@ public:
 			_solvedPosition = Pos4;
 			break;
 		default:
-			cout << "InValid ConnectionPosition" << endl;
+			cout << "InValid ConnectionPosition 5 " << endl;
 		}
 	}
 
@@ -302,7 +311,8 @@ public:
 			break;
 
 		default:
-			cout << endl << "Invalid Connection Position" << endl;
+			cout<<"_itsPosition"<<_itsPosition<<endl;
+			cout << endl << "Invalid Connection Position 4 " << endl;
 		}
 	}
 };
@@ -341,7 +351,7 @@ public:
 			break;
 
 		default:
-			cout << endl << "Invalid Connection Position" << endl;
+			cout << endl << "Invalid Connection Position 3 " << endl;
 		}
 	}
 };
@@ -366,7 +376,7 @@ public:
 			break;
 
 		default:
-			cout << endl << "Invalid Connection Position" << endl;
+			cout << endl << "Invalid Connection Position 2" << endl;
 		}
 	}
 };
@@ -397,7 +407,7 @@ public:
 			break;
 
 		default:
-			cout << endl << "Invalid Connection Position" << endl;
+			cout << endl << "Invalid Connection Position 1" << endl;
 		}
 	}
 };

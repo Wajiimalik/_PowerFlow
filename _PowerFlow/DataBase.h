@@ -65,6 +65,11 @@ private: //methods
 	void AssigningValuesToSolvedPuzzle();
 	void AssigningValuesToUnSolvedPuzzle();
 
+	void AssigningValuesToFactoryHouses(int a,char c);
+	void AssigningValuesToConnectionType(int a,char c);
+	void AssigningValuesToSolvedPuzzle(int a,char c);
+	void AssigningValuesToUnSolvedPuzzle(int a,char c);
+
 public:
 	void SetLevelNo(int level);
 
