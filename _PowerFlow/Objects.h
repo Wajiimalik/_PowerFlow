@@ -128,6 +128,7 @@ public:
 			break;
 
 		default:
+			cout<<"invalid pos1"<<endl;
 			break;
 		}
 	}
@@ -153,8 +154,11 @@ public:
 
 	void SetConnectionPosition(/*ConnectionPosition c*/ int inPos)
 	{
-		switch (inPos)
+		cout<<" inPos"<<inPos <<endl;
+		
+		switch(inPos)
 		{
+			
 		case 1:
 			_itsPosition = Pos1;
 			break;
@@ -168,12 +172,18 @@ public:
 			_itsPosition = Pos4;
 			break;
 		default:
-			cout << "InValid ConnectionPosition" << endl;
+			cout<<" inPos"<<inPos <<endl;
+			cout << "InValid ConnectionPosition 6 " << endl;
 		}
+
+
+		
+
 	}
 
 	void SetSolvedConnectionPosition(/*ConnectionPosition c*/ int inPos)
 	{
+		
 		switch (inPos)
 		{
 		case 1:
@@ -189,7 +199,7 @@ public:
 			_solvedPosition = Pos4;
 			break;
 		default:
-			cout << "InValid ConnectionPosition" << endl;
+			cout << "InValid ConnectionPosition 5 " << endl;
 		}
 	}
 	void Set_a_Coord(int x, int y)
@@ -259,7 +269,8 @@ public:
 			break;
 
 		default:
-			cout << endl << "Invalid Connection Position" << endl;
+			cout<<"_itsPosition"<<_itsPosition<<endl;
+			cout << endl << "Invalid Connection Position 4 " << endl;
 		}
 	}
 };
@@ -298,7 +309,7 @@ public:
 			break;
 
 		default:
-			cout << endl << "Invalid Connection Position" << endl;
+			cout << endl << "Invalid Connection Position 3 " << endl;
 		}
 	}
 };
@@ -323,7 +334,7 @@ public:
 			this->DrawDown(window);
 			break;
 		default:
-			cout << endl << "Invalid Connection Position" << endl;
+			cout << endl << "Invalid Connection Position 2" << endl;
 		}
 	}
 };
@@ -354,7 +365,7 @@ public:
 			break;
 
 		default:
-			cout << endl << "Invalid Connection Position" << endl;
+			cout << endl << "Invalid Connection Position 1" << endl;
 		}
 	}
 };

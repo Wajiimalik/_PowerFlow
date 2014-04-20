@@ -42,6 +42,9 @@ void Cell :: CalculateCoords()
 	
 void Cell :: SetObjectType(char inType)
 {
+	
+	
+	
 		switch (inType)
 		{
 		case 'F':
@@ -91,8 +94,13 @@ void Cell::SetConnectionPostion(int inPos)
 //not in set object type method b/c these connections will be in each cell
 void Cell :: SetConnectionType(char inType)
 {
+	
+	
+	
 		switch (inType)
 		{
+			
+
 		case 'L':
 			
 			_ptrConnection = new L_ShapedConnection;

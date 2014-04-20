@@ -1,5 +1,8 @@
 #include "DataBase.h"
-
+#include<fstream>
+#include<string>
+#include<iostream>
+using namespace std;
 	Co_Ordinates::Co_Ordinates() : _x(0), _y(0) {}
 
 	void Co_Ordinates :: SetX(int x)	 { _x = x; }
@@ -23,6 +26,28 @@
 	void DataBase::SetLevelNo(int level)
 	{
 		_levelNo = level;
+	}
+
+	void DataBase :: AssigningValuesToFactoryHouses(int a,char c)
+	{
+		ObjectsType[a] = c;	
+		cout<<a<<"-"<<c<<endl;
+	}
+	void DataBase :: AssigningValuesToConnectionType(int a,char c)
+	{
+		connectionType[a] = c;
+		cout<<a<<"-"<<c<<endl;
+	}
+	void DataBase :: AssigningValuesToSolvedPuzzle(int a,char c)
+	{
+		solvedPuzzle[a] = c; 
+		cout<<a<<"-"<<c<<endl;
+	}
+	void DataBase :: AssigningValuesToUnSolvedPuzzle(int a,char c)
+	{
+		unSolvedPuzzle[a] = c;
+		cout<<a<<"-"<<c<<endl;
+
 	}
 
 	void DataBase :: AssigningValuesToFactoryHouses()
@@ -92,11 +117,145 @@
 
 	void  DataBase:: LoadDataBase()
 	{
+
+
+		/*/
 		this->AssigningValuesToConnectionType();
 		this->AssigningValuesToFactoryHouses();
 		this->AssigningValuesToSolvedPuzzle();
 		this->AssigningValuesToUnSolvedPuzzle();
 		//assigns value from filing to these 4 params //(set method)
+		*/
+
+		/*
+		ifstream in;
+		switch(level)
+		{
+		case 1:
+		in.open("FILES\\level_1.txt");
+		break;
+
+		case 2:
+		in.open("FILES\\level_2.txt");
+		break;
+
+		case 3:
+		in.open("FILES\\level_3.txt");
+		break;
+
+		default:
+		cout<<"incorrect level no "<<endl;
+		break;
+		}
+		*/
+
+		ifstream in;
+		
+				in.open("FILES\\level_3.txt");
+					
+				if(!in)
+					cout<<"file cannot be open "<<endl;
+			
+			//string a1[5];
+			char c;
+	
+			if(!in)
+				cout<<"error in opening ";
+	
+			else 
+				{int a=0;
+					while(a<25)
+					{	
+						in.get(c);
+					
+						if(c=='\n')
+						continue;
+				
+						else
+						{
+							
+							
+									
+							solvedPuzzle[a] = c-48; 				
+								in.get(c);
+					
+								unSolvedPuzzle[a] = c-48;
+								
+								in.get(c);
+								
+	switch (c)
+		{
+		case 'H':
+			ObjectsType[a] = 'H';	
+			//cout<<"got H"<<endl;
+			break;
+
+		case 'F':
+		ObjectsType[a] = 'F';	
+		//	cout<<"got F"<<endl;
+		break;
+
+		case 'C':
+			ObjectsType[a] = 'C';
+				//cout<<"got C"<<endl;
+			break;
+
+
+		default:
+			cout << "sorry11" << endl;
+
+			break;
+		}
+
+
+								in.get(c);
+								
+									//void AssigningValuesToConnectionType(int a,char c);
+							
+								switch (c)
+		{
+		case 'L':
+			connectionType[a] = 'L';		
+				
+			break;
+
+		case 'T':
+		connectionType[a] = 'T';
+			
+		break;
+
+		case 'S':
+			connectionType[a] = 'S';
+				
+			break;
+
+		case 'M':
+		connectionType[a] = 'M';
+			
+			break;
+
+		default:
+			cout << "sorry" << endl;
+			break;
+		}
+//cout<<"================"<<endl;
+//cout<<"a"<<a<<endl;
+//							cout<<solvedPuzzle[a] <<endl;
+//							cout<<unSolvedPuzzle[a]<<endl;
+//							cout<<ObjectsType[a]<<endl;
+//							cout<<connectionType[a]<<endl;
+//							cout<<"================"<<endl;
+						
+a++;
+							
+					    	}
+								
+						}
+					}	
+	
+				
+	//in.close();
+	
 	}
 
 	char  DataBase :: GetObjectType(int index)
@@ -116,5 +275,6 @@
 
 	int  DataBase :: GetUnSolvedPuzzle(int index)
 	{
+		
 		return unSolvedPuzzle[index];
 	}

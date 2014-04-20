@@ -18,7 +18,7 @@ class Cell
 	ObjectState _cellState;
 	ObjectType _objectType;
 
-
+	 
 	//ConnectionType _connectionType;
 	ConnectionPosition _connectionPosition;
 

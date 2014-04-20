@@ -162,7 +162,7 @@ void T_ShapedConnection :: DrawObject()
 		break;
 
 	default:
-		cout << endl << "Invalid Connection Position" << endl;
+		cout << endl << "Invalid Connection Position22222" << endl;
 	}
 }
 
@@ -184,7 +184,7 @@ void StraightConnection :: DrawObject()
 		this->DrawDown();
 		break;
 	default:
-		cout << endl << "Invalid Connection Position" << endl;
+		cout << endl << "Invalid Connection Position22222" << endl;
 	}
 }
 
@@ -213,7 +213,7 @@ void MiniConnection :: DrawObject()
 		break;
 
 	default:
-		cout << endl << "Invalid Connection Position" << endl;
+		cout << endl << "Invalid Connection Position2222" << endl;
 	}
 }
 */
