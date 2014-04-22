@@ -236,11 +236,11 @@ using namespace std;
 
 					//cout<<"================"<<endl;
 					//cout<<"a"<<a<<endl;
-					//							cout<<solvedPuzzle[a] <<endl;
-					//							cout<<unSolvedPuzzle[a]<<endl;
-					//							cout<<ObjectsType[a]<<endl;
-					//							cout<<connectionType[a]<<endl;
-					//							cout<<"================"<<endl;
+					//cout<<solvedPuzzle[a] <<endl;
+					//cout<<unSolvedPuzzle[a]<<endl;
+					//cout<<ObjectsType[a]<<endl;
+					//cout<<connectionType[a]<<endl;
+					//cout<<"================"<<endl;
 						
 					a++;	
 				}	

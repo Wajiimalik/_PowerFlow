@@ -4,6 +4,7 @@
 #include <string>
 
 #include "DataBase.h"
+#include "Menu.h"
 #include "Board.h"
 #include "Cell.h"
 #include "Objects.h"
@@ -19,6 +20,7 @@ public:
 
 private:
 	//level no would be assigned to this "_levelNo" from menu object
+	Menu * _menu;
 	Board * _board;
 	int _levelNo;
 
@@ -28,9 +30,16 @@ private:
 	Texture house;
 	Texture houseUnLit;
 
+	Texture start;
+	Texture menu;
+	Texture instructions;
+	Texture about;
+	Texture level;
+
 	int _mouseX;
 	int _mouseY;
 
+	void SelectLevel();
 	void Initialize();
 	void Draw();
 	bool ProcessEvents();
