@@ -17,7 +17,8 @@ enum ObjectType { Factory, House, Connection };
 enum ConnectionType { L_Shaped, T_Shaped, Straight, Mini };
 enum ConnectionPosition { Pos1, Pos2, Pos3, Pos4 };
 enum ObjectState { Lit, UnLit };
-enum GameState { Selection, Level1, Level2, Level3, Level4, Level5, Win };
+enum GameState { Selection, Playing, Transition, Win };
+enum MenuMode { Start, MenuOptions, Level, Instructions, About };
 enum PuzzleState { Solved, UnSolved };
 
 
@@ -26,6 +27,7 @@ typedef ConnectionType ConnectionType;
 typedef ConnectionPosition ConnectionPosition;
 typedef ObjectState ObjectState;
 typedef GameState GameState;
+typedef MenuMode MenuMode;
 typedef PuzzleState PuzzleState;
 
 
