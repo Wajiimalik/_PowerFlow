@@ -8,8 +8,8 @@ Game::Game(RenderWindow & window)
 	_menu = new Menu(_window, _gameState);
 	_menu->SetTextures(start, menu, level, instructions, about);
 
-	//it will be shown only one time
-	_menu->Display_StartScreen();
+	//it will be shown once at the start of game so it is in game constructor
+	_menu->DrawMenu();
 	_window.display();
 }
 
@@ -24,7 +24,7 @@ bool Game::Run()
 			break;
 
 		case Playing:
-			if (ProcessEvents() == true)
+			if (ProcessEvents() == true)	//returns true only if gameState is in Playing mode
 			{
 				int i;
 				for (i = 0; i < ROW*COL; i++)
@@ -32,31 +32,44 @@ bool Game::Run()
 					if (_board->Cells[i].GetClickedCell(_mouseX, _mouseY))
 					{
 						_board->Cells[i]._ptrConnection->MoveConnection();
-						Draw();
-						if (GameOver())
+						_board->DrawBoard(_window);
+
+						if (GameOver()) //break from for loop
 							break;
+
 						break;
 					}
 				}
-				if (_gameState == Win)
+
+				if (_gameState == Win)	//break case and restart switch loop
 					break;
 			}
-				break;
+
+			break; //break from case without any condition
+
+		case Transition:
+			ProcessEvents();
+			break;
 
 		case Win:
 			cout << "GAME OVER! ";
-			_window.display();
-			_gameState = Selection;
-			_menu->_menuMode = MenuOptions;
+			//_window.draw(_GameOver);
+			//_window.display();
+			ProcessEvents();
 			break;
-
 		}
-		
 	}
-	
 	return true;
 }
 
+void Game ::  PlayGame()
+{
+	_gameState = Playing;
+	Initialize(); //Initilize all data from file 
+	_window.clear();
+	_board->DrawBoard(_window);
+	Run();	//again run in Playing mode
+}
 
 void Game::Initialize() 
 {
@@ -73,18 +86,13 @@ void Game::Initialize()
 	} 
 }
 
-void Game :: Draw()
-{
-	_board->DrawBoard(_window);
-}
-
 bool Game :: ProcessEvents()
 {
 	Event event;
 
 	while (_window.pollEvent(event))
 	{
-		if (_menu->_menuMode == MenuOptions)
+		if (_menu->_menuMode == MenuOptions)	
 			_menu->DrawMenu();
 
 		//if window is closed "X"
@@ -115,13 +123,13 @@ bool Game :: ProcessEvents()
 						break;
 
 					case MenuOptions:
-						_menu->DrawMenu();
+						_menu->DrawMenu();	//It has 4 options
+
 						//LEVEL
 						if (_mouseX > 132 && _mouseX < 446 + 132 && _mouseY > 222 && _mouseY < 230 + 222)
 						{
 							_menu->_menuMode = Level;
 							_menu->DrawMenu();
-							//break;
 						}
 
 						//INSTRUCTIONS
@@ -129,7 +137,6 @@ bool Game :: ProcessEvents()
 						{
 							_menu->_menuMode = Instructions;
 							_menu->DrawMenu();
-							//break;
 						}
 
 						//ABOUT
@@ -137,72 +144,61 @@ bool Game :: ProcessEvents()
 						{
 							_menu->_menuMode = About;
 							_menu->DrawMenu();
-							//break;
 						}
 
 						//EXIT
 						if (_mouseX > 489 && _mouseX < 264 + 489 && _mouseY > 469 && _mouseY < 143 + 469)
 						{
-							//UnloadContent();
+							UnloadContent();
 							_window.close();
 							exit(1);
 						}
-						break;
+						break;	//case break
 
-					case Level:
+					case Level:	
+						//there are total  5 levels/options that a user can select
 						//LEVEL1
 						if (_mouseX > 313 && _mouseX < 313 + 260 && _mouseY > 195 && _mouseY < 195 + 60)
 						{
-							_gameState = Playing;
-							Initialize();
-							_window.clear();
-							Draw();
-							Run();
+							_levelNo = 1;
+							PlayGame();
 						}
 
 						//LEVEL2
 						if (_mouseX > 313 && _mouseX < 313 + 264 && _mouseY > 289 && _mouseY < 289 + 60)
 						{
-							_gameState = Playing;
-							Initialize();
-							_window.clear();
-							Draw();
-							Run();
+							_levelNo = 2;
+							PlayGame();
 						}
 
 						//LEVEL3
 						if (_mouseX > 313 && _mouseX < 313 + 270 && _mouseY > 383 && _mouseY < 383 + 60)
 						{
-							_gameState = Playing;
-							Initialize();
-							_window.clear();
-							Draw();
-							Run();
+							_levelNo = 3;
+							PlayGame();
 						}
 
 						//LEVEL4
 						if (_mouseX > 313 && _mouseX < 313 + 274 && _mouseY > 477 && _mouseY < 477 + 60)
 						{
-							_gameState = Playing;
-							Initialize();
-							_window.clear();
-							Draw();
-							Run();
+							_levelNo = 4;
+							PlayGame();
 						}
 
 						//LEVEL5
 						if (_mouseX > 313 && _mouseX < 313 + 274 && _mouseY > 571 && _mouseY < 571 + 60)
 						{
-							_gameState = Playing;
-							Initialize();
-							_window.clear();
-							Draw();
-							Run();
+							_levelNo = 5;
+							PlayGame();
 						}
 
+						//no break here b/c it also has a Back button same like in Instructioins
+						//and about windows at same position so same code for these 3
 
+					
 					case Instructions:
 					case About:
+						//back button
 						if (_mouseX > 25 && _mouseX < 25 + 140 && _mouseY > 620 && _mouseY < 620 + 50)
 						{
 							_menu->_menuMode = MenuOptions;
@@ -210,24 +206,70 @@ bool Game :: ProcessEvents()
 						}
 						break;
 					}
-					break;
-
 
 				case Playing:
+					//If user has clicked OnBoard then return true (:
 					if (_mouseX > 50 && _mouseX < (50 + (120 * 5)) && _mouseY > 50 && _mouseY < (50 + (120 * 5)))
 					{
 						return true;
 					}
-					else return false;
+					else return false;	//if user has clicked on board
 
+				case Transition:
+					//if clicked on back button
+					if (_mouseX > 25 && _mouseX < 25 + 140 && _mouseY > 620 && _mouseY < 620 + 50)
+					{
+						_gameState = Selection;
+						_menu->_menuMode = MenuOptions;
+						_menu->DrawMenu();
+					}
+					//if clicked on next button
+					if (_mouseX > 735  && _mouseX < 735 + 140 && _mouseY > 624 && _mouseY < 624 + 50)
+					{
+						//_gameState = Playing;
+						ChangeLevelNo();
+						_window.clear();
+						PlayGame();
+						
+
+					}
+					break;
+
+				case Win:
+					if (_mouseX > 25 && _mouseX < 25 + 140 && _mouseY > 620 && _mouseY < 620 + 50)
+					{
+						_gameState = Selection;
+						_menu->_menuMode = MenuOptions;
+						_menu->DrawMenu();
+					}
+					break;
 				}
-				break;
 			}
-			//if user has clicked on board
-
 		}
 	}
-	return false;
+	return false; //if no event happening then back to while loop of Run() 
+}
+
+void Game :: ChangeLevelNo()
+{
+	switch (_levelNo)
+	{
+	case 1:
+		_levelNo = 2;
+		break;
+
+	case 2:
+		_levelNo = 3;
+		break;
+
+	case 3:
+		_levelNo = 4;
+		break;
+
+	case 4:
+		_levelNo = 5;
+		break;
+	}
 }
 
 bool Game ::GameOver()
@@ -235,19 +277,54 @@ bool Game ::GameOver()
 	int count = 0;
 	
 	for (int i = 0; i < ROW * COL; i++)
-	{
+	{	
+		//compares solved and unsolved positions of all coonnections after each click in playing mode
 		if (_board->Cells[i]._ptrConnection->_itsPosition != _board->Cells[i]._ptrConnection->_solvedPosition)
 		{
 			count++;
 		}
 	}
-		if (count == 0)
+
+	if (count == 0)
+	{
+		switch (_levelNo)
 		{
+		case 1:
+			_gameState = Transition;
+			_window.draw(Transition1);
+			_window.display();
+			break;
+
+		case 2:
+			_gameState = Transition;
+			_window.draw(Transition2);
+			_window.display();
+			break;
+
+		case 3:
+			_gameState = Transition;
+			_window.draw(Transition3);
+			_window.display();
+			break;
+
+		case 4:
+			_gameState = Transition;
+			_window.draw(Transition4);
+			_window.display();
+			break;
+
+		case 5:
 			UnloadContent();
 			_gameState = Win;
-			return true;
+			_window.draw(_GameOver);
+			_window.display();
+			break;
 		}
-		return false;
+
+		return true;
+	}
+
+	return false;
 }
 
 void Game :: LoadContent()
@@ -261,9 +338,23 @@ void Game :: LoadContent()
 	instructions.loadFromFile("Pic\\Instructions.png");
 	about.loadFromFile("Pic\\About.png");
 	level.loadFromFile("Pic\\Level.png");
+
+	transition1.loadFromFile("Pic\\Transition1.png");
+	Transition1.setTexture(transition1);
+
+	transition2.loadFromFile("Pic\\Transition2.png");
+	Transition2.setTexture(transition2);
+
+	transition3.loadFromFile("Pic\\Transition3.png");
+	Transition3.setTexture(transition3);
+
+	transition4.loadFromFile("Pic\\Transition4.png");
+	Transition4.setTexture(transition4);
+
+	gameOver.loadFromFile("Pic\\GameOver.png");
+	_GameOver.setTexture(gameOver);
 }
 
 void Game::UnloadContent()
-{
-	//delete _board;
+{ 
 }

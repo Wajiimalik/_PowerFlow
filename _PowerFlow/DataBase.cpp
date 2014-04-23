@@ -128,9 +128,9 @@ using namespace std;
 		//assigns value from filing to these 4 params //(set method)
 		*/
 
-		/*
+		
 		ifstream in;
-		switch(level)
+		switch(_levelNo)
 		{
 		case 1:
 		in.open("FILES\\level_1.txt");
@@ -148,11 +148,12 @@ using namespace std;
 		cout<<"incorrect level no "<<endl;
 		break;
 		}
-		*/
-
-		ifstream in;
 		
-		in.open("FILES\\level_3.txt");
+
+
+		//ifstream in;
+		
+		//in.open("FILES\\level_3.txt");
 					
 		if (!in)
 		{

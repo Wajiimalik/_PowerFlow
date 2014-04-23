@@ -17,7 +17,7 @@ enum ObjectType { Factory, House, Connection };
 enum ConnectionType { L_Shaped, T_Shaped, Straight, Mini };
 enum ConnectionPosition { Pos1, Pos2, Pos3, Pos4 };
 enum ObjectState { Lit, UnLit };
-enum GameState { Selection, Playing, Win };
+enum GameState { Selection, Playing, Transition, Win };
 enum MenuMode { Start, MenuOptions, Level, Instructions, About };
 enum PuzzleState { Solved, UnSolved };
 

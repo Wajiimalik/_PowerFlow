@@ -15,61 +15,36 @@ void Menu::SetTextures(Texture & start, Texture & menu, Texture & level, Texture
 	_Level.setTexture(level);
 }
 
-void Menu :: Display_StartScreen()
-{
-	_window.draw(_Start);
-}
-
-void Menu :: Display_MenuScreen()
-{
-	_window.draw(_Menu);
-}
-
-void Menu :: Display_LevelScreen()
-{
-	_window.draw(_Level);
-}
-
-void Menu :: Display_InstructionsScreen()
-{
-	_window.draw(_Instructions);
-}
-
-void Menu :: Display_AboutScreen()
-{
-	_window.draw(_About);
-}
-
 void Menu::DrawMenu()
 {
 	switch (_menuMode)
 	{
 	case Start:
-		Display_MenuScreen();
+		_window.draw(_Start);
 		_window.display();
 		return;
 		break;
 
 	case MenuOptions:
-		Display_MenuScreen();
+		_window.draw(_Menu);
 		_window.display();
 		return;
 		break;
 
 	case Level:
-		Display_LevelScreen();
+		_window.draw(_Level);
 		_window.display();
 		return;
 		break;
 
 	case Instructions:
-		Display_InstructionsScreen(); 
+		_window.draw(_Instructions);
 		_window.display();
 		return;
 		break;
 
 	case About:
-		Display_AboutScreen();
+		_window.draw(_About);
 		_window.display();
 		return;
 		break;
@@ -79,9 +54,4 @@ void Menu::DrawMenu()
 		return;
 		break;
 	}
-}
-
-MenuMode Menu :: GetMenuMode()
-{
-	return _menuMode;
 }
