@@ -128,9 +128,9 @@ using namespace std;
 		//assigns value from filing to these 4 params //(set method)
 		*/
 
-		/*
+		
 		ifstream in;
-		switch(level)
+		switch(_levelNo)
 		{
 		case 1:
 		in.open("FILES\\level_1.txt");
@@ -144,16 +144,19 @@ using namespace std;
 		in.open("FILES\\level_3.txt");
 		break;
 
+		case 4:
+			in.open("FILES\\level_4.txt");
+			break;
+
+		case 5:
+			in.open("FILES\\level_5.txt");
+			break;
+
 		default:
 		cout<<"incorrect level no "<<endl;
 		break;
 		}
-		*/
-
-		ifstream in;
 		
-		in.open("FILES\\level_5.txt");
-					
 		if (!in)
 		{
 			cout << "file cannot be open " << endl;
@@ -237,11 +240,11 @@ using namespace std;
 
 					//cout<<"================"<<endl;
 					//cout<<"a"<<a<<endl;
-					//							cout<<solvedPuzzle[a] <<endl;
-					//							cout<<unSolvedPuzzle[a]<<endl;
-					//							cout<<ObjectsType[a]<<endl;
-					//							cout<<connectionType[a]<<endl;
-					//							cout<<"================"<<endl;
+					//cout<<solvedPuzzle[a] <<endl;
+					//cout<<unSolvedPuzzle[a]<<endl;
+					//cout<<ObjectsType[a]<<endl;
+					//cout<<connectionType[a]<<endl;
+					//cout<<"================"<<endl;
 						
 					a++;	
 				}	
