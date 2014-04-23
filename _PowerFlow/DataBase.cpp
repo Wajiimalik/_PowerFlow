@@ -152,7 +152,7 @@ using namespace std;
 
 		ifstream in;
 		
-		in.open("FILES\\level_3.txt");
+		in.open("FILES\\level_5.txt");
 					
 		if (!in)
 		{
@@ -179,6 +179,7 @@ using namespace std;
 				
 				else
 				{		
+					
 					solvedPuzzle[a] = c-48; 				
 					in.get(c);
 					
