@@ -144,6 +144,14 @@ using namespace std;
 		in.open("FILES\\level_3.txt");
 		break;
 
+		case 4:
+		in.open("FILES\\level_4.txt");
+		break;
+
+		case 5:
+		in.open("FILES\\level_5.txt");
+		break;
+
 		default:
 		cout<<"incorrect level no "<<endl;
 		break;
@@ -152,6 +160,7 @@ using namespace std;
 
 		ifstream in;
 		
+		// when the switch case will becomminted out then ths open code will be removed .only this single line.
 		in.open("FILES\\level_5.txt");
 					
 		if (!in)
