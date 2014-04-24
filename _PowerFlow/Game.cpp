@@ -64,6 +64,7 @@ void Game ::  PlayGame()
 	_gameState = Playing;
 	Initialize(); //Initilize all data from file 
 	_window.clear();
+	_board->DrawLevelbar(_window);
 	_board->DrawBoard(_window);
 	Run();	//again run in Playing mode
 }
@@ -71,7 +72,8 @@ void Game ::  PlayGame()
 void Game::Initialize() 
 {
 	_board = new Board(_levelNo);
-	
+	_board->SetTexture(level1, level2, level3, level4, level5);
+
 	//setting textures of house and factory
 	for (int i = 0; i < ROW*COL; i++)
 	{
@@ -91,13 +93,6 @@ bool Game :: ProcessEvents()
 	{
 		if (_menu->_menuMode == MenuOptions)	
 			_menu->DrawMenu();
-
-		//if window is closed "X"
-		if (event.type == Event::Closed)
-		{
-			UnloadContent();
-			_window.close();
-		}
 
 
 		if (event.type == Event::MouseButtonPressed)
@@ -146,7 +141,6 @@ bool Game :: ProcessEvents()
 						//EXIT
 						if (_mouseX > 489 && _mouseX < 264 + 489 && _mouseY > 469 && _mouseY < 143 + 469)
 						{
-							UnloadContent();
 							_window.close();
 							exit(1);
 						}
@@ -210,6 +204,16 @@ bool Game :: ProcessEvents()
 					{
 						return true;
 					}
+
+					//Quit button
+					if (_mouseX > 690 && _mouseX < 690 + 170 && _mouseY > 612 && _mouseY < 612 + 50)
+					{
+						_gameState = Selection;
+						_menu->_menuMode = MenuOptions;
+						_menu->DrawMenu();
+
+						break;
+					}
 					else return false;	//if user has clicked on board
 
 				case Transition:
@@ -227,8 +231,6 @@ bool Game :: ProcessEvents()
 						ChangeLevelNo();
 						_window.clear();
 						PlayGame();
-						
-
 					}
 					break;
 
@@ -284,6 +286,7 @@ bool Game ::GameOver()
 
 	if (count == 0)
 	{
+		sleep(seconds(0.6));
 		switch (_levelNo)
 		{
 		case 1:
@@ -311,7 +314,6 @@ bool Game ::GameOver()
 			break;
 
 		case 5:
-			UnloadContent();
 			_gameState = Win;
 			_window.draw(_GameOver);
 			_window.display();
@@ -336,6 +338,14 @@ void Game :: LoadContent()
 	about.loadFromFile("Pic\\About.png");
 	level.loadFromFile("Pic\\Level.png");
 
+
+	level1.loadFromFile("Pic\\Level1.png");
+	level2.loadFromFile("Pic\\Level2.png");
+	level3.loadFromFile("Pic\\Level3.png");
+	level4.loadFromFile("Pic\\Level4.png");
+	level5.loadFromFile("Pic\\Level5.png");
+
+
 	transition1.loadFromFile("Pic\\Transition1.png");
 	Transition1.setTexture(transition1);
 
@@ -350,8 +360,4 @@ void Game :: LoadContent()
 
 	gameOver.loadFromFile("Pic\\GameOver.png");
 	_GameOver.setTexture(gameOver);
-}
-
-void Game::UnloadContent()
-{ 
 }

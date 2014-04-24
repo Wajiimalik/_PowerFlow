@@ -1,7 +1,7 @@
 #include "Board.h"
 #include "DataBase.h"
 
-Board::Board(int levelNo) : _puzzleState(UnSolved)
+Board::Board(int levelNo) : _puzzleState(UnSolved), _levelNo(levelNo)
 {
 	DataBase.SetLevelNo(levelNo);
 	DataBase.LoadDataBase();
@@ -26,6 +26,48 @@ Board::Board(int levelNo) : _puzzleState(UnSolved)
 		Cells[i]._ptrConnection->SetSolvedConnectionPosition(DataBase.GetSolvedPuzzle(i));
 	}
 
+}
+
+void Board :: SetTexture(Texture & l1, Texture & l2, Texture & l3, Texture & l4, Texture & l5)
+{
+	Level1.setTexture(l1);
+	Level2.setTexture(l2);
+	Level3.setTexture(l3);
+	Level4.setTexture(l4);
+	Level5.setTexture(l5);
+
+	Level1.setPosition(680, 40);
+	Level2.setPosition(680, 40);
+	Level3.setPosition(680, 40);
+	Level4.setPosition(680, 40);
+	Level5.setPosition(680, 40);
+
+}
+
+void Board::DrawLevelbar(RenderWindow & window)
+{
+	switch (_levelNo)
+	{
+	case 1:
+		window.draw(Level1);
+		break;
+
+	case 2:
+		window.draw(Level2);
+		break;
+
+	case 3:
+		window.draw(Level3);
+		break;
+
+	case 4:
+		window.draw(Level4);
+		break;
+
+	case 5:
+		window.draw(Level5);
+		break;
+	}
 }
 
 void Board :: DrawBoard(RenderWindow & window)

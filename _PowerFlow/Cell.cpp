@@ -136,9 +136,6 @@ void Cell :: DrawCell(RenderWindow & window)
 	{
 		_ptrObjects->DrawObject(window);
 	}
-
-	/// ****** ERROR ******* ///
-	//window.display();
 }
 
 //To find user have clicked on which cell (return its index)

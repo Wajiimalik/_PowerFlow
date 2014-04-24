@@ -18,6 +18,7 @@ public:
 
 	RenderWindow & _window;
 
+	~Game() {}
 private:
 	//level no. would be assigned to this "_levelNo" from menu object
 	Menu * _menu;
@@ -41,6 +42,12 @@ private:
 	Texture transition3;
 	Texture transition4;
 
+	Texture level1;
+	Texture level2;
+	Texture level3;
+	Texture level4;
+	Texture level5;
+
 	Sprite Transition1;
 	Sprite Transition2;
 	Sprite Transition3;
@@ -60,5 +67,4 @@ private:
 	bool GameOver();
 
 	void LoadContent();
-	void UnloadContent();
 };
