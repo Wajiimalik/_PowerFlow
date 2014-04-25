@@ -61,6 +61,8 @@ private:
 
 	void PlayGame();
 	void Initialize();
+
+	void LitDraw();
 	bool ProcessEvents();
 
 	void ChangeLevelNo();

@@ -17,6 +17,8 @@ void Menu::SetTextures(Texture & start, Texture & menu, Texture & level, Texture
 
 void Menu::DrawMenu()
 {
+	_window.clear(Color::Black);
+
 	switch (_menuMode)
 	{
 	case Start:

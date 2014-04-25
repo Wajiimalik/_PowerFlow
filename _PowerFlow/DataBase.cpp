@@ -28,23 +28,6 @@ using namespace std;
 		_levelNo = level;
 	}
 
-	void DataBase :: AssigningValuesToFactoryHouses(int a,char c)
-	{
-		ObjectsType[a] = c;	
-	}
-	void DataBase :: AssigningValuesToConnectionType(int a,char c)
-	{
-		connectionType[a] = c;
-	}
-	void DataBase :: AssigningValuesToSolvedPuzzle(int a,char c)
-	{
-		solvedPuzzle[a] = c; 
-	}
-	void DataBase :: AssigningValuesToUnSolvedPuzzle(int a,char c)
-	{
-		unSolvedPuzzle[a] = c;
-
-	}
 
 	void  DataBase:: LoadDataBase()
 	{

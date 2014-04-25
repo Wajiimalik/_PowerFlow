@@ -28,6 +28,7 @@ private:
 
 public:
 	Cell();
+	
 	void SetCell(int inLeft, int inTop);
 
 	void SetObjectType(char inType);

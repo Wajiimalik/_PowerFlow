@@ -10,7 +10,7 @@ Game::Game(RenderWindow & window)
 
 	//it will be shown once at the start of game so it is in game constructor
 	_menu->DrawMenu();
-	_window.display();
+	//_window.display();
 }
 
 bool Game::Run()
@@ -20,10 +20,14 @@ bool Game::Run()
 		switch (_gameState)
 		{
 		case Selection:
+			_window.clear(Color::Black);
 			ProcessEvents();
 			break;
 
 		case Playing:
+			_window.clear(Color::Black);
+			_board->DrawLevelbar(_window);
+
 			if (ProcessEvents() == true)	//returns true only if gameState is in Playing mode
 			{
 				int i;
@@ -48,6 +52,7 @@ bool Game::Run()
 			break; //break from case without any condition
 
 		case Transition:
+			_window.clear(Color::Black);
 			ProcessEvents();
 			break;
 
@@ -63,8 +68,8 @@ void Game ::  PlayGame()
 {
 	_gameState = Playing;
 	Initialize(); //Initilize all data from file 
-	_window.clear();
-	_board->DrawLevelbar(_window);
+	//_window.clear();
+	//_board->DrawLevelbar(_window);
 	_board->DrawBoard(_window);
 	Run();	//again run in Playing mode
 }
@@ -83,6 +88,18 @@ void Game::Initialize()
 		if (_board->Cells[i]._objectType == House)
 			_board->Cells[i]._ptrObjects->SetTexture(house, houseUnLit);
 	} 
+
+	_board->DrawLevelbar(_window);
+}
+
+void Game::LitDraw()
+{
+	for (int i = 0; i < ROW*COL; i++)
+	{
+		_board->Cells[i]._cellState = Lit;
+	}
+	_board->DrawBoard(_window);
+	_window.display();
 }
 
 bool Game :: ProcessEvents()
@@ -110,7 +127,7 @@ bool Game :: ProcessEvents()
 					switch (_menu->_menuMode)
 					{
 					case Start:
-						_menu->DrawMenu();
+						//_menu->DrawMenu();
 						_menu->_menuMode = MenuOptions;
 						break;
 
@@ -286,7 +303,10 @@ bool Game ::GameOver()
 
 	if (count == 0)
 	{
-		sleep(seconds(0.6));
+		LitDraw();
+		_window.display();
+		sleep(seconds(2));
+
 		switch (_levelNo)
 		{
 		case 1:

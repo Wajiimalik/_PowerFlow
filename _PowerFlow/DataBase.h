@@ -59,19 +59,6 @@ class DataBase
 
 	int _levelNo;
 
-
-private: //methods
-	//method for test program //in end this part would be removed
-	void AssigningValuesToFactoryHouses();
-	void AssigningValuesToConnectionType();
-	void AssigningValuesToSolvedPuzzle();
-	void AssigningValuesToUnSolvedPuzzle();
-
-	void AssigningValuesToFactoryHouses(int a,char c);
-	void AssigningValuesToConnectionType(int a,char c);
-	void AssigningValuesToSolvedPuzzle(int a,char c);
-	void AssigningValuesToUnSolvedPuzzle(int a,char c);
-
 public:
 	void SetLevelNo(int level);
 
