@@ -1,7 +1,7 @@
 #include "Game.h"
 
-Game::Game(RenderWindow & window) 
-: _window(window), _levelNo(1), _gameState(Selection), _mouseX(0), _mouseY(0) 
+Game::Game(RenderWindow & window)
+: _window(window), _levelNo(1), _gameState(Selection), _mouseX(0), _mouseY(0), _board(NULL)
 {
 	LoadContent(); 
 
@@ -10,7 +10,6 @@ Game::Game(RenderWindow & window)
 
 	//it will be shown once at the start of game so it is in game constructor
 	_menu->DrawMenu();
-	//_window.display();
 }
 
 bool Game::Run()
@@ -25,6 +24,7 @@ bool Game::Run()
 			break;
 
 		case Playing:
+			
 			_window.clear(Color::Black);
 			_board->DrawLevelbar(_window);
 
@@ -68,8 +68,6 @@ void Game ::  PlayGame()
 {
 	_gameState = Playing;
 	Initialize(); //Initilize all data from file 
-	//_window.clear();
-	//_board->DrawLevelbar(_window);
 	_board->DrawBoard(_window);
 	Run();	//again run in Playing mode
 }
@@ -127,7 +125,6 @@ bool Game :: ProcessEvents()
 					switch (_menu->_menuMode)
 					{
 					case Start:
-						//_menu->DrawMenu();
 						_menu->_menuMode = MenuOptions;
 						break;
 
@@ -159,6 +156,7 @@ bool Game :: ProcessEvents()
 						if (_mouseX > 489 && _mouseX < 264 + 489 && _mouseY > 469 && _mouseY < 143 + 469)
 						{
 							_window.close();
+							UnloadContent();
 							exit(1);
 						}
 						break;	//case break
@@ -380,4 +378,17 @@ void Game :: LoadContent()
 
 	gameOver.loadFromFile("Pic\\GameOver.png");
 	_GameOver.setTexture(gameOver);
+}
+
+void Game :: UnloadContent()	//to delete all pointers
+{
+	if (_board != NULL)
+	{
+		delete _board->Cells[0]._ptrObjects;
+		delete _board->Cells[0]._ptrConnection;
+		delete _board;
+	}
+	
+	delete _menu;
+	delete g;
 }

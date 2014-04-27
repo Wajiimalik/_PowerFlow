@@ -18,7 +18,6 @@ Board::Board(int levelNo) : _puzzleState(UnSolved), _levelNo(levelNo)
 	//passing data loaded from dataBase to rest objects
 	for (int i = 0; i < ROW*COL; i++)
 	{
-		cout<<i<<endl;
 		Cells[i].SetIndexOfThisCell(i);
 		Cells[i].SetObjectType(DataBase.GetObjectType(i));
 		Cells[i].SetConnectionType(DataBase.GetConnectionType(i));

@@ -18,12 +18,19 @@ public:
 
 	RenderWindow & _window;
 
+	void GiveGameToGame(Game * h)
+	{
+		g = h;
+	}
+
+	
 	~Game() {}
 private:
 	//level no. would be assigned to this "_levelNo" from menu object
 	Menu * _menu;
 	Board * _board;
 	int _levelNo;
+	Game *g;
 
 	GameState _gameState;
 
@@ -69,4 +76,5 @@ private:
 	bool GameOver();
 
 	void LoadContent();
+	void UnloadContent();
 };

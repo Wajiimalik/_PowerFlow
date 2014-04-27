@@ -194,8 +194,6 @@ public:
 
 	void SetConnectionPosition(int inPos)
 	{
-		cout<<" inPos"<<inPos <<endl;
-		
 		switch(inPos)
 		{
 			
@@ -212,7 +210,6 @@ public:
 			_itsPosition = Pos4;
 			break;
 		default:
-			cout<<" inPos"<<inPos <<endl;
 			cout << "InValid ConnectionPosition 6 " << endl;
 		}
 

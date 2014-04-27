@@ -70,9 +70,6 @@ void Cell :: SetObjectType(char inType)
 //not in set object type method b/c these connections will be in each cell
 void Cell :: SetConnectionType(char inType)
 {
-	
-	
-	
 		switch (inType)
 		{
 			

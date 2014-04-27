@@ -7,6 +7,7 @@ int main()
 
 	window.setFramerateLimit(30);
 	Game *game = new Game(window);
+	game->GiveGameToGame(game);
 	game->Run();
 	
 	return 0;
