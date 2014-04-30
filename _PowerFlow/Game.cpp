@@ -38,6 +38,7 @@ bool Game::Run()
 						_board->Cells[i]._ptrConnection->MoveConnection();
 						_board->DrawBoard(_window);
 
+
 						if (GameOver()) //break from for loop
 							break;
 
@@ -66,6 +67,7 @@ bool Game::Run()
 
 void Game ::  PlayGame()
 {
+	_window.clear(Color::Black);
 	_gameState = Playing;
 	Initialize(); //Initilize all data from file 
 	_board->DrawBoard(_window);
@@ -390,5 +392,5 @@ void Game :: UnloadContent()	//to delete all pointers
 	}
 	
 	delete _menu;
-	delete g;
+	delete _game;
 }

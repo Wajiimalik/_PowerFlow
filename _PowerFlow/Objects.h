@@ -212,10 +212,6 @@ public:
 		default:
 			cout << "InValid ConnectionPosition 6 " << endl;
 		}
-
-
-		
-
 	}
 
 	void SetSolvedConnectionPosition(int inPos)

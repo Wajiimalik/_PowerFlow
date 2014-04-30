@@ -76,6 +76,5 @@ void Board :: DrawBoard(RenderWindow & window)
 	{
 		Cells[index].DrawCell(window);
 	}
-
 	window.display();
 }

@@ -20,7 +20,7 @@ public:
 
 	void GiveGameToGame(Game * h)
 	{
-		g = h;
+		_game = h;
 	}
 
 	
@@ -30,7 +30,7 @@ private:
 	Menu * _menu;
 	Board * _board;
 	int _levelNo;
-	Game *g;
+	Game * _game;
 
 	GameState _gameState;
 

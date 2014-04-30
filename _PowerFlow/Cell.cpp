@@ -41,9 +41,6 @@ void Cell :: CalculateCoords()
 	
 void Cell :: SetObjectType(char inType)
 {
-	
-	
-	
 		switch (inType)
 		{
 		case 'F':
@@ -72,8 +69,6 @@ void Cell :: SetConnectionType(char inType)
 {
 		switch (inType)
 		{
-			
-
 		case 'L':
 			
 			_ptrConnection = new L_ShapedConnection;
@@ -122,7 +117,6 @@ void Cell :: LitAllObjects()
 
 void Cell :: DrawCell(RenderWindow & window)
 {
-
 	window.draw(_rectangle);
 
 	this->LitAllObjects();
